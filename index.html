@@ -1,0 +1,984 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>WEB SOLUTIONZ — Professional Website Development</title>
+<meta name="description" content="WEB SOLUTIONZ builds modern, high-performance websites for businesses across India."/>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Fraunces:wght@700;900&display=swap');
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:'Plus Jakarta Sans',Arial,sans-serif;background:#fff;color:#1a1a2e;overflow-x:hidden;}
+::-webkit-scrollbar{width:5px;}
+::-webkit-scrollbar-thumb{background:#2563eb;border-radius:3px;}
+
+/* ── VARIABLES ── */
+:root{
+  --blue:#2563EB;--blue-d:#1D4ED8;--blue-pale:#EFF6FF;--blue-mid:#DBEAFE;
+  --navy:#1a1a2e;--gray:#6B7280;--border:#E5E7EB;--off:#FAFAF8;
+  --amber:#F59E0B;--green:#16A34A;
+}
+
+/* ── UTILS ── */
+.container{max-width:1160px;margin:0 auto;padding:0 5%;}
+.hidden{display:none!important;}
+.flex{display:flex;align-items:center;}
+.grid-2{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:48px;align-items:center;}
+.grid-3{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:20px;}
+.grid-4{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:20px;}
+.text-center{text-align:center;}
+.section{padding:80px 0;}
+.label{display:inline-flex;align-items:center;gap:7px;background:var(--blue-pale);color:var(--blue);border:1px solid var(--blue-mid);padding:5px 14px;border-radius:20px;font-size:11px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;margin-bottom:14px;}
+.label-dot{width:6px;height:6px;border-radius:50%;background:var(--blue);display:inline-block;}
+.section-title{font-family:'Fraunces',serif;font-size:clamp(1.9rem,4vw,2.8rem);font-weight:900;color:var(--navy);line-height:1.1;margin-bottom:14px;}
+.section-sub{font-size:15px;color:var(--gray);line-height:1.75;max-width:500px;}
+.blue{color:var(--blue);}
+
+/* ── BUTTONS ── */
+.btn{display:inline-flex;align-items:center;gap:8px;padding:13px 26px;border-radius:10px;font-family:inherit;font-size:14px;font-weight:700;cursor:pointer;border:none;text-decoration:none;transition:all .25s;white-space:nowrap;}
+.btn-primary{background:var(--blue);color:#fff;box-shadow:0 4px 14px rgba(37,99,235,.3);}
+.btn-primary:hover{background:var(--blue-d);transform:translateY(-2px);box-shadow:0 8px 24px rgba(37,99,235,.4);}
+.btn-outline{background:transparent;color:var(--navy);border:2px solid var(--border);}
+.btn-outline:hover{border-color:var(--blue);color:var(--blue);transform:translateY(-2px);}
+.btn-white{background:#fff;color:var(--blue);box-shadow:0 4px 14px rgba(0,0,0,.1);}
+.btn-white:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.15);}
+.btn-sm{padding:9px 18px;font-size:13px;}
+.btn-full{width:100%;justify-content:center;}
+
+/* ── CARD ── */
+.card{background:#fff;border:1px solid var(--border);border-radius:16px;padding:26px;transition:all .3s cubic-bezier(.25,.46,.45,.94);box-shadow:0 2px 8px rgba(0,0,0,.04);}
+.card:hover{transform:translateY(-6px);box-shadow:0 20px 50px rgba(37,99,235,.12);border-color:rgba(37,99,235,.2);}
+.icon-box{width:50px;height:50px;background:var(--blue-pale);border-radius:12px;display:flex;align-items:center;justify-content:center;color:var(--blue);margin-bottom:16px;transition:all .3s;font-size:22px;}
+.card:hover .icon-box{background:var(--blue);color:#fff;}
+
+/* ── BADGE ── */
+.badge{display:inline-flex;align-items:center;gap:4px;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:700;}
+.badge-blue{background:var(--blue-pale);color:var(--blue);border:1px solid var(--blue-mid);}
+.badge-green{background:#f0fdf4;color:#16a34a;border:1px solid #bbf7d0;}
+.badge-amber{background:#fffbeb;color:#d97706;border:1px solid #fde68a;}
+
+/* ── NAVBAR ── */
+#navbar{position:fixed;top:0;left:0;right:0;z-index:900;background:rgba(255,255,255,.96);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:0 5%;transition:box-shadow .3s;}
+#navbar.scrolled{box-shadow:0 4px 20px rgba(0,0,0,.08);}
+.nav-inner{max-width:1160px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:66px;}
+.logo{font-weight:800;font-size:19px;color:var(--navy);cursor:pointer;letter-spacing:-.3px;}
+.logo span{color:var(--blue);}
+.nav-links{display:flex;align-items:center;gap:28px;}
+.nav-link{font-size:13px;font-weight:600;color:var(--gray);cursor:pointer;padding:4px 0;position:relative;background:none;border:none;font-family:inherit;transition:color .2s;}
+.nav-link::after{content:'';position:absolute;bottom:-2px;left:0;width:0;height:2px;background:var(--blue);border-radius:1px;transition:width .3s;}
+.nav-link:hover,.nav-link.active{color:var(--navy);}
+.nav-link:hover::after,.nav-link.active::after{width:100%;}
+.hamburger{display:none;background:none;border:none;cursor:pointer;padding:4px;font-size:24px;}
+
+/* ── MOBILE MENU ── */
+#mobile-menu{position:fixed;inset:0;background:#fff;z-index:1000;flex-direction:column;align-items:center;justify-content:center;gap:28px;display:none;}
+#mobile-menu.open{display:flex;}
+.mob-link{font-family:'Fraunces',serif;font-size:2rem;font-weight:700;color:var(--navy);cursor:pointer;background:none;border:none;transition:color .2s;}
+.mob-link:hover{color:var(--blue);}
+.mob-close{position:absolute;top:20px;right:5%;background:none;border:none;font-size:28px;cursor:pointer;color:var(--navy);}
+
+/* ── HERO ── */
+#hero{min-height:100vh;display:flex;align-items:center;padding:100px 5% 60px;background:linear-gradient(150deg,#fafaf8 0%,#eff6ff 60%,#fafaf8 100%);position:relative;overflow:hidden;}
+.hero-grid-bg{position:absolute;inset:0;background-image:linear-gradient(rgba(37,99,235,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(37,99,235,.04) 1px,transparent 1px);background-size:56px 56px;pointer-events:none;}
+.hero-blob{position:absolute;border-radius:50%;filter:blur(80px);pointer-events:none;}
+
+/* ── STATS BAR ── */
+.stats-bar{background:var(--navy);padding:28px 5%;}
+.stats-inner{max-width:1160px;margin:0 auto;display:flex;justify-content:space-around;flex-wrap:wrap;gap:20px;}
+.stat-val{font-family:'Fraunces',serif;font-size:2.2rem;font-weight:900;color:var(--amber);line-height:1;}
+.stat-lbl{font-size:12px;color:rgba(255,255,255,.55);margin-top:4px;font-weight:600;}
+
+/* ── HERO CARD ── */
+.hero-card{background:#fff;border-radius:20px;padding:28px;border:1px solid var(--border);box-shadow:0 20px 60px rgba(37,99,235,.1);max-width:440px;}
+.metric-bar-track{height:6px;background:#f3f4f6;border-radius:3px;overflow:hidden;margin-top:6px;}
+.metric-bar-fill{height:100%;border-radius:3px;transition:width 1.5s ease;}
+.hc-head{display:flex;align-items:center;gap:10px;background:linear-gradient(120deg,#eff6ff 0%,#f8fafc 100%);border-radius:12px;padding:14px 16px;margin-bottom:16px;border:1px solid #e5edff;}
+.hc-icon{width:38px;height:38px;border-radius:10px;background:#2563eb;display:flex;align-items:center;justify-content:center;color:#fff;font-size:18px;box-shadow:0 6px 18px rgba(37,99,235,.25);}
+.hc-title{font-weight:800;font-size:13px;color:var(--navy);}
+.hc-sub{font-size:11px;color:#6b7280;}
+.hc-live{margin-left:auto;font-size:11px;font-weight:700;color:#16a34a;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:999px;padding:4px 10px;}
+.hc-kpis{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-bottom:14px;}
+.hc-kpi{background:#f8fafc;border:1px solid #eef2f7;border-radius:12px;padding:12px;text-align:center;}
+.hc-kpi-val{font-family:'Fraunces',serif;font-size:18px;font-weight:900;color:var(--navy);line-height:1;}
+.hc-kpi-lbl{font-size:10px;color:#6b7280;margin-top:4px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;}
+.hc-progress{margin-bottom:14px;}
+.hc-progress-row{display:flex;justify-content:space-between;font-size:12px;font-weight:700;color:#374151;margin-bottom:6px;}
+.hc-progress-track{height:7px;background:#eef2ff;border-radius:999px;overflow:hidden;}
+.hc-progress-fill{height:100%;width:86%;background:linear-gradient(90deg,#2563eb,#60a5fa);border-radius:999px;box-shadow:0 6px 16px rgba(37,99,235,.25);}
+.hc-steps{display:grid;gap:8px;margin-bottom:14px;}
+.hc-step{display:flex;align-items:center;gap:8px;font-size:12px;color:#4b5563;}
+.hc-dot{width:10px;height:10px;border-radius:50%;background:#22c55e;box-shadow:0 0 0 4px #dcfce7;flex-shrink:0;}
+.hc-tags{border-top:1px solid #f3f4f6;padding-top:12px;display:flex;gap:7px;flex-wrap:wrap;}
+.hc-tag{font-size:11px;font-weight:700;border-radius:999px;padding:4px 10px;border:1px solid #e5e7eb;background:#fff;color:#2563eb;}
+.hc-tag.alt{color:#16a34a;border-color:#bbf7d0;background:#f0fdf4;}
+.hc-tag.warn{color:#d97706;border-color:#fde68a;background:#fffbeb;}
+.hc-starter{background:linear-gradient(135deg,#eff6ff 0%,#ffffff 70%);border:1px solid #e5edff;border-radius:16px;padding:16px;margin-bottom:14px;}
+.hc-starter-title{font-weight:800;font-size:14px;color:var(--navy);margin-bottom:6px;}
+.hc-starter-sub{font-size:12px;color:#6b7280;margin-bottom:10px;}
+.hc-price-row{display:flex;align-items:baseline;gap:8px;margin-bottom:10px;}
+.hc-price{font-family:'Fraunces',serif;font-size:28px;font-weight:900;color:var(--navy);}
+.hc-price-note{font-size:11px;color:#6b7280;font-weight:600;}
+.hc-badge{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:700;border-radius:999px;padding:4px 10px;background:#f0fdf4;border:1px solid #bbf7d0;color:#16a34a;}
+.hc-list{display:grid;gap:8px;margin:12px 0 6px 0;}
+.hc-li{display:flex;align-items:flex-start;gap:8px;font-size:12px;color:#4b5563;}
+.hc-li-dot{width:16px;height:16px;border-radius:50%;background:#eff6ff;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:9px;color:#2563eb;margin-top:2px;}
+.hc-cta{display:flex;gap:8px;margin-top:10px;}
+.hc-btn{flex:1;display:inline-flex;align-items:center;justify-content:center;padding:10px 12px;border-radius:10px;border:1px solid #e5e7eb;background:#fff;font-size:12px;font-weight:700;cursor:pointer;transition:all .2s;}
+.hc-btn.primary{background:#2563eb;color:#fff;border-color:#2563eb;}
+.hc-trust{display:flex;gap:10px;align-items:center;margin-top:10px;font-size:11px;color:#6b7280;}
+.hc-trust-dot{width:8px;height:8px;border-radius:50%;background:#22c55e;}
+
+/* ── PROCESS ── */
+.process-card{text-align:center;padding:32px 20px;background:#fff;border-radius:16px;border:1px solid var(--border);}
+.process-num{font-family:'Fraunces',serif;font-size:3.5rem;font-weight:900;color:var(--blue-mid);line-height:1;margin-bottom:10px;}
+
+/* ── TESTIMONIAL ── */
+.testi-card{background:#fff;border:1px solid var(--border);border-radius:16px;padding:26px;box-shadow:0 2px 8px rgba(0,0,0,.04);position:relative;}
+.quote{font-family:'Fraunces',serif;font-size:4.5rem;line-height:1;color:var(--blue-mid);position:absolute;top:8px;right:18px;}
+
+/* ── PRICING ── */
+.price-card{background:#fff;border:1px solid var(--border);border-radius:20px;padding:30px;transition:all .3s;}
+.price-card:hover{border-color:var(--blue);box-shadow:0 20px 50px rgba(37,99,235,.1);}
+.price-card.featured{background:var(--navy);color:#fff;border-color:var(--navy);box-shadow:0 20px 60px rgba(26,26,46,.3);}
+.price-val{font-family:'Fraunces',serif;font-size:2.4rem;font-weight:900;line-height:1;}
+.check-row{display:flex;align-items:center;gap:8px;margin-bottom:10px;}
+.check-circle{width:18px;height:18px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:10px;}
+
+/* ── CONTACT ── */
+.contact-input{width:100%;background:#f3f4f6;border:2px solid transparent;border-radius:10px;padding:13px 15px;font-family:inherit;font-size:14px;color:var(--navy);outline:none;transition:border-color .2s;}
+.contact-input:focus{border-color:var(--blue);background:#fff;}
+.input-label{font-size:12px;font-weight:700;color:#374151;display:block;margin-bottom:6px;}
+
+/* ── FOOTER ── */
+footer{background:var(--navy);color:#fff;padding:60px 5% 26px;}
+.footer-grid{max-width:1160px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:36px;margin-bottom:44px;}
+.footer-bottom{max-width:1160px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;padding-top:22px;border-top:1px solid rgba(255,255,255,.08);}
+.f-link{display:block;background:none;border:none;cursor:pointer;font-size:13px;color:rgba(255,255,255,.5);margin-bottom:9px;padding:0;font-family:inherit;text-align:left;transition:color .2s;}
+.f-link:hover{color:#93c5fd;}
+.f-head{font-weight:700;font-size:12px;color:rgba(255,255,255,.85);text-transform:uppercase;letter-spacing:.08em;margin-bottom:14px;}
+.social-btn{width:34px;height:34px;border-radius:8px;background:rgba(255,255,255,.08);display:inline-flex;align-items:center;justify-content:center;color:rgba(255,255,255,.6);text-decoration:none;transition:all .2s;margin-right:8px;font-size:14px;}
+.social-btn:hover{background:var(--blue);color:#fff;}
+
+/* ── WHATSAPP ── */
+#wa-btn{position:fixed;bottom:26px;right:26px;z-index:999;width:58px;height:58px;border-radius:50%;background:#25D366;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 20px rgba(37,211,102,.4);cursor:pointer;text-decoration:none;transition:all .3s;animation:waPulse 2.5s ease-in-out infinite;}
+#wa-btn:hover{transform:scale(1.1);box-shadow:0 10px 30px rgba(37,211,102,.5);}
+@keyframes waPulse{0%,100%{box-shadow:0 6px 20px rgba(37,211,102,.4);}50%{box-shadow:0 6px 30px rgba(37,211,102,.7),0 0 0 10px rgba(37,211,102,.08);}}
+.wa-tip{position:absolute;right:68px;background:var(--navy);color:#fff;padding:6px 12px;border-radius:8px;font-size:12px;font-weight:600;white-space:nowrap;opacity:0;transition:opacity .2s;pointer-events:none;}
+#wa-btn:hover .wa-tip{opacity:1;}
+
+/* ── ANIMATIONS ── */
+.reveal{opacity:0;transform:translateY(26px);transition:opacity .7s ease,transform .7s ease;}
+.reveal.show{opacity:1;transform:translateY(0);}
+.d1{transition-delay:.1s;}.d2{transition-delay:.18s;}.d3{transition-delay:.26s;}.d4{transition-delay:.34s;}
+
+
+
+/* ── SKILL BAR ── */
+.sk-track{height:6px;background:#f3f4f6;border-radius:3px;overflow:hidden;margin-top:7px;}
+.sk-fill{height:100%;border-radius:3px;background:linear-gradient(90deg,var(--blue),#60a5fa);transition:width 1.4s cubic-bezier(.25,.46,.45,.94);}
+
+/* ── TABS ── */
+.tab-btn{padding:8px 18px;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;border:none;font-family:inherit;transition:all .2s;margin:4px;}
+.tab-btn.on{background:var(--blue);color:#fff;}
+.tab-btn:not(.on){background:#f3f4f6;color:var(--gray);}
+.tab-btn:not(.on):hover{background:var(--blue-mid);color:var(--blue);}
+
+/* ── FAQ ── */
+.faq-item{border-bottom:1px solid var(--border);padding:18px 0;cursor:pointer;}
+.faq-q{display:flex;justify-content:space-between;align-items:center;font-weight:700;font-size:14px;color:var(--navy);}
+.faq-a{font-size:13px;color:var(--gray);line-height:1.75;margin-top:10px;display:none;}
+.faq-a.open{display:block;}
+
+/* ── TEAM ── */
+.team-card{background:#fff;border:1px solid var(--border);border-radius:16px;overflow:hidden;transition:all .3s;}
+.team-card:hover{transform:translateY(-5px);box-shadow:0 20px 50px rgba(37,99,235,.1);}
+
+/* ── TIMELINE ── */
+.tl-line{position:absolute;left:55px;top:0;bottom:0;width:2px;background:var(--blue-mid);}
+.tl-dot{width:12px;height:12px;border-radius:50%;background:var(--blue);box-shadow:0 0 0 4px var(--blue-mid);flex-shrink:0;position:relative;z-index:1;}
+
+/* ── CTA SECTION ── */
+.cta-section{background:linear-gradient(135deg,var(--navy) 0%,#1e3a8a 100%);color:#fff;padding:80px 5%;text-align:center;position:relative;overflow:hidden;}
+
+@media(max-width:768px){
+  .nav-links,.nav-cta-wrap{display:none;}
+  .hamburger{display:block;}
+  .section{padding:56px 0;}
+  #hero{padding:90px 5% 50px;}
+  .grid-2{gap:32px;}
+}
+</style>
+</head>
+<body>
+
+
+
+<!-- NAVBAR -->
+<nav id="navbar">
+  <div class="nav-inner">
+    <div class="logo" onclick="showPage('home')"> <span style="color: #16A34A;"> hM </span> WEB <span> SOLUTIONZ </span></div>
+    <div class="nav-links" id="nav-links">
+      <button class="nav-link active" onclick="showPage('home')">Home</button>
+      <button class="nav-link" onclick="showPage('about')">About</button>
+      <button class="nav-link" onclick="showPage('services')">Services</button>
+      <button class="nav-link" onclick="showPage('pricing')">Pricing</button>
+      
+      <button class="nav-link" onclick="showPage('contact')">Contact</button>
+    </div>
+    <div class="nav-cta-wrap flex" style="gap:12px;">
+      <a href="tel:+919876543210" style="font-size:13px;font-weight:600;color:#6b7280;text-decoration:none;display:flex;align-items:center;gap:5px;">📞 +91 8810454694</a>
+      <button class="btn btn-primary btn-sm" onclick="showPage('contact')">Get Quote →</button>
+    </div>
+    <button class="hamburger" onclick="openMob()">☰</button>
+  </div>
+</nav>
+
+<!-- MOBILE MENU -->
+<div id="mobile-menu">
+  <button class="mob-close" onclick="closeMob()">✕</button>
+  <button class="mob-link" onclick="showPage('home')">Home</button>
+  <button class="mob-link" onclick="showPage('about')">About</button>
+  <button class="mob-link" onclick="showPage('services')">Services</button>
+  <button class="mob-link" onclick="showPage('pricing')">Pricing</button>
+  
+  <button class="mob-link" onclick="showPage('contact')">Contact</button>
+  <button class="btn btn-primary" onclick="showPage('contact')" style="margin-top:8px;">Get Free Quote →</button>
+</div>
+
+<!-- WHATSAPP -->
+<a id="wa-btn" href="https://wa.me/918810454694?text=Hi! I want to discuss a web project." target="_blank">
+  <span class="wa-tip">Chat with us!</span>
+  <svg width="28" height="28" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+</a>
+
+<!-- ══ PAGES ══════════════════════════════════════════════ -->
+
+<!-- HOME -->
+<div id="page-home">
+<section id="hero">
+  <div class="hero-grid-bg"></div>
+  <div class="hero-blob" style="width:600px;height:600px;background:rgba(37,99,235,.06);top:-250px;right:-150px;"></div>
+  <div class="hero-blob" style="width:400px;height:400px;background:rgba(245,158,11,.05);bottom:-100px;left:-100px;"></div>
+  <div class="container" style="position:relative;">
+    <div class="grid-2">
+      <div>
+        <!-- <div class="label reveal"><span class="label-dot"></span>🚀 Top-Rated Web Agency in India</div> -->
+        <h1 class="section-title reveal d1" style="font-size:clamp(2.3rem,5.5vw,3.8rem);">We Build Websites<br>That <span class="blue">Drive Results</span></h1>
+        <p class="section-sub reveal d2" style="margin-bottom:30px;">Modern, high-performance websites for businesses, hospitals, schools & startups. From design to deployment — we handle everything.</p>
+        <div class="flex reveal d3" style="gap:12px;flex-wrap:wrap;">
+          <button class="btn btn-primary" onclick="showPage('contact')">Get Free Quote →</button>
+          <button class="btn btn-outline" onclick="showPage('services')">View Our Services →</button>
+        </div>
+
+      </div>
+      <div class="reveal d2">
+        <div class="hero-card">
+          <div class="hc-head">
+            <div class="hc-icon">✨</div>
+            <div>
+              <div class="hc-title">Starter Website Pack</div>
+              <div class="hc-sub">Perfect for new business launch</div>
+            </div>
+            <div class="hc-live">● Limited</div>
+          </div>
+
+          <div class="hc-starter">
+            <div class="hc-starter-title">Launch Offer (New Business)</div>
+            <div class="hc-starter-sub">Simple, clean & fast website to start getting customers.</div>
+            <div class="hc-price-row">
+              <div class="hc-price">₹5,999</div>
+              <div class="hc-price-note">one-time - 3-5 days</div>
+            </div>
+            <div class="hc-badge">Free domain setup*</div>
+            <div class="hc-list">
+              <div class="hc-li"><span class="hc-li-dot">✓</span>3-5 pages modern design</div>
+              <div class="hc-li"><span class="hc-li-dot">✓</span>Mobile responsive + WhatsApp</div>
+              <div class="hc-li"><span class="hc-li-dot">✓</span>Basic SEO + fast load</div>
+            </div>
+            <div class="hc-cta">
+              <button class="hc-btn primary" onclick="showPage('contact')">Get Offer</button>
+              <button class="hc-btn" onclick="showPage('services')">See Details</button>
+            </div>
+            <div class="hc-trust">
+              <span class="hc-trust-dot"></span>
+              <span>Pay 50% now, 50% after delivery</span>
+            </div>
+          </div>
+
+          <div class="hc-tags">
+            <span class="hc-tag">New Business</span>
+            <span class="hc-tag alt">Budget Friendly</span>
+            <span class="hc-tag warn">Fast Delivery</span>
+            <span class="hc-tag">Support ✓</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- FOUNDERS ON HOME -->
+<section class="section" style="background:#fff;">
+  <div class="container">
+    <div class="text-center" style="margin-bottom:44px;">
+      <div class="label reveal"><span class="label-dot"></span>Meet the Founders</div>
+      <h2 class="section-title reveal d1">The People Behind<br><span class="blue">WEB SOLUTIONZ</span></h2>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:28px;max-width:760px;margin:0 auto;">
+      <!-- HASEEB HOME -->
+      <div class="reveal d1" style="background:#fff;border:1px solid #e5e7eb;border-radius:24px;overflow:hidden;box-shadow:0 4px 24px rgba(37,99,235,.07);transition:all .3s;" onmouseover="this.style.transform='translateY(-6px)';this.style.boxShadow='0 20px 50px rgba(37,99,235,.13)'" onmouseout="this.style.transform='none';this.style.boxShadow='0 4px 24px rgba(37,99,235,.07)'">
+        <div style="height:220px;background:linear-gradient(135deg,#eff6ff,#dbeafe);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;">
+          <div id="haseeb-img-home-wrap" style="width:130px;height:130px;border-radius:50%;background:#2563eb;border:4px solid #fff;box-shadow:0 8px 32px rgba(37,99,235,.25);display:flex;align-items:center;justify-content:center;overflow:hidden;cursor:pointer;" onclick="document.getElementById('haseeb-upload-home').click()">
+            <img id="haseeb-img-home" src="images/20251205_191521.jpg" alt="Haseeb Ahmad" style="width:100%;height:100%;object-fit:cover;display:block;border-radius:50%;">
+            <span id="haseeb-init-home" style="display:none;">HA</span>
+          </div>
+          <input type="file" id="haseeb-upload-home" accept="image/*" style="display:none;" onchange="loadPhotoHome(this,'haseeb')">
+          <div style="position:absolute;bottom:10px;right:10px;background:rgba(255,255,255,.92);border-radius:8px;padding:4px 10px;font-size:11px;font-weight:700;color:#2563eb;cursor:pointer;" onclick="document.getElementById('haseeb-upload-home').click()"></div>
+        </div>
+        <div style="padding:22px;">
+          <h3 style="font-family:'Fraunces',serif;font-size:1.25rem;font-weight:700;margin-bottom:4px;">Haseeb Ahmad</h3>
+          <div style="font-size:12px;color:#2563eb;font-weight:700;margin-bottom:10px;">Co-Founder & Web Developer</div>
+          <p style="font-size:13px;color:#6b7280;line-height:1.75;">Passionate about building fast, modern websites. Haseeb handles development and ensures every project is pixel-perfect.</p>
+        </div>
+      </div>
+      <!-- MUJTUBA HOME -->
+      <div class="reveal d2" style="background:#fff;border:1px solid #e5e7eb;border-radius:24px;overflow:hidden;box-shadow:0 4px 24px rgba(37,99,235,.07);transition:all .3s;" onmouseover="this.style.transform='translateY(-6px)';this.style.boxShadow='0 20px 50px rgba(37,99,235,.13)'" onmouseout="this.style.transform='none';this.style.boxShadow='0 4px 24px rgba(37,99,235,.07)'">
+        <div style="height:220px;background:linear-gradient(135deg,#f0fdf4,#bbf7d0);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;">
+          <div id="mujtuba-img-home-wrap" style="width:130px;height:130px;border-radius:50%;background:#16a34a;border:4px solid #fff;box-shadow:0 8px 32px rgba(22,163,74,.25);display:flex;align-items:center;justify-content:center;overflow:hidden;cursor:pointer;" onclick="document.getElementById('mujtuba-upload-home').click()">
+            <img id="mujtuba-img-home" src="images/1000116936.jpg" alt="Mujtuba Mazroof" style="width:100%;height:100%;object-fit:cover;display:block;border-radius:50%;">
+            <span id="mujtuba-init-home" style="font-family:'Fraunces',serif;font-size:2.6rem;font-weight:900;color:#fff;display:none;">MM</span>
+          </div>
+          <input type="file" id="mujtuba-upload-home" accept="image/*" style="display:none;" onchange="loadPhotoHome(this,'mujtuba')">
+          <div style="position:absolute;bottom:10px;right:10px;background:rgba(255,255,255,.92);border-radius:8px;padding:4px 10px;font-size:11px;font-weight:700;color:#16a34a;cursor:pointer;" onclick="document.getElementById('mujtuba-upload-home').click()"></div>
+        </div>
+        <div style="padding:22px;">
+          <h3 style="font-family:'Fraunces',serif;font-size:1.25rem;font-weight:700;margin-bottom:4px;">Mujtuba Mazroof</h3>
+          <div style="font-size:12px;color:#16a34a;font-weight:700;margin-bottom:10px;">Co-Founder & Web Developer</div>
+          <p style="font-size:13px;color:#6b7280;line-height:1.75;">Passionate about building fast, modern websites. Mujtuba handles development and ensures every project is pixel-perfect.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES STRIP -->
+<section class="section" style="background:#fafaf8;">
+  <div class="container">
+    <div class="text-center" style="margin-bottom:48px;">
+      <div class="label reveal"><span class="label-dot"></span>Our Services</div>
+      <h2 class="section-title reveal d1">Everything You Need<br>to Succeed Online</h2>
+      <p class="section-sub reveal d2" style="margin:0 auto;">Complete web solutions tailored for your business — any industry, any scale.</p>
+    </div>
+    <div class="grid-3">
+      <div class="card reveal d1"><div class="icon-box">💻</div><h3 style="font-weight:700;font-size:15px;margin-bottom:7px;">Website Development</h3><p style="font-size:13px;color:#6b7280;line-height:1.7;">Full-stack websites with React, Next.js, Node.js — built for performance and growth.</p><button class="btn btn-sm" onclick="showPage('services')" style="margin-top:12px;color:#2563eb;background:none;border:none;cursor:pointer;font-weight:700;font-size:13px;padding:0;">Learn more →</button></div>
+      <div class="card reveal d2"><div class="icon-box">🎨</div><h3 style="font-weight:700;font-size:15px;margin-bottom:7px;">Custom Design</h3><p style="font-size:13px;color:#6b7280;line-height:1.7;">Pixel-perfect, brand-aligned designs. Zero templates — 100% unique to your business.</p><button class="btn btn-sm" onclick="showPage('services')" style="margin-top:12px;color:#2563eb;background:none;border:none;cursor:pointer;font-weight:700;font-size:13px;padding:0;">Learn more →</button></div>
+      <div class="card reveal d3"><div class="icon-box">📈</div><h3 style="font-weight:700;font-size:15px;margin-bottom:7px;">SEO Optimization</h3><p style="font-size:13px;color:#6b7280;line-height:1.7;">Technical SEO & content strategies to rank on Google and drive organic traffic.</p><button class="btn btn-sm" onclick="showPage('services')" style="margin-top:12px;color:#2563eb;background:none;border:none;cursor:pointer;font-weight:700;font-size:13px;padding:0;">Learn more →</button></div>
+      <div class="card reveal d1"><div class="icon-box">🛒</div><h3 style="font-weight:700;font-size:15px;margin-bottom:7px;">E-commerce</h3><p style="font-size:13px;color:#6b7280;line-height:1.7;">High-converting online stores with Razorpay, UPI, and seamless checkout experience.</p><button class="btn btn-sm" onclick="showPage('services')" style="margin-top:12px;color:#2563eb;background:none;border:none;cursor:pointer;font-weight:700;font-size:13px;padding:0;">Learn more →</button></div>
+      <div class="card reveal d2"><div class="icon-box">🔧</div><h3 style="font-weight:700;font-size:15px;margin-bottom:7px;">Bug Fixing</h3><p style="font-size:13px;color:#6b7280;line-height:1.7;">Fast diagnosis and resolution of bugs, crashes, and performance issues in any website.</p><button class="btn btn-sm" onclick="showPage('services')" style="margin-top:12px;color:#2563eb;background:none;border:none;cursor:pointer;font-weight:700;font-size:13px;padding:0;">Learn more →</button></div>
+      <div class="card reveal d3"><div class="icon-box">🛡️</div><h3 style="font-weight:700;font-size:15px;margin-bottom:7px;">Maintenance</h3><p style="font-size:13px;color:#6b7280;line-height:1.7;">Ongoing updates, security patches, daily backups & 24/7 uptime monitoring.</p><button class="btn btn-sm" onclick="showPage('services')" style="margin-top:12px;color:#2563eb;background:none;border:none;cursor:pointer;font-weight:700;font-size:13px;padding:0;">Learn more →</button></div>
+    </div>
+    <div class="text-center" style="margin-top:32px;"><button class="btn btn-outline" onclick="showPage('services')">View All Services →</button></div>
+  </div>
+</section>
+
+<!-- WHY US -->
+<section class="section" style="background:#fff;">
+  <div class="container">
+    <div class="grid-2">
+      <div>
+        <div class="label reveal"><span class="label-dot"></span>Why Choose Us</div>
+        <h2 class="section-title reveal d1">The WEB SOLUTIONZ<br>Advantage</h2>
+        <p class="section-sub reveal d2" style="margin-bottom:22px;">We don't just build websites — we build growth engines that deliver real results.</p>
+        <div id="why-list"></div>
+        <button class="btn btn-primary reveal" style="margin-top:22px;" onclick="showPage('about')">Meet Our Team →</button>
+      </div>
+      <div class="grid-2" style="grid-template-columns:1fr 1fr;gap:14px;" id="why-cards"></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div style="position:absolute;width:500px;height:500px;border-radius:50%;background:rgba(255,255,255,.03);top:-250px;left:50%;transform:translateX(-50%);"></div>
+  <div class="container" style="position:relative;">
+    <div class="label reveal" style="background:rgba(255,255,255,.1);color:#fff;border-color:rgba(255,255,255,.2);margin:0 auto 14px;display:inline-flex;"><span style="width:6px;height:6px;border-radius:50%;background:#4ade80;display:inline-block;"></span>Ready to Start?</div>
+    <h2 class="section-title reveal d1" style="color:#fff;">Let's Build Your<br>Dream Website</h2>
+    <p class="reveal d2" style="color:rgba(255,255,255,.65);max-width:440px;margin:0 auto 28px;font-size:15px;">Get a free consultation and quote within 24 hours.</p>
+    <div class="flex reveal d3" style="gap:12px;justify-content:center;flex-wrap:wrap;">
+      <button class="btn btn-white" onclick="showPage('contact')">Get Free Quote →</button>
+      <a class="btn" href="https://wa.me/919876543210" target="_blank" style="background:#25d366;color:#fff;">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+        WhatsApp Us
+      </a>
+    </div>
+  </div>
+</section>
+
+<div id="home-footer"></div>
+</div><!-- /page-home -->
+
+<!-- ABOUT -->
+<div id="page-about" class="hidden">
+  <div style="padding-top:66px;">
+    <section class="section" style="background:linear-gradient(150deg,#fafaf8,#eff6ff);padding-top:80px;text-align:center;">
+      <div class="container">
+        <div class="label reveal"><span class="label-dot"></span>About Us</div>
+        <h1 class="section-title reveal d1" style="font-size:clamp(2.1rem,5vw,3.4rem);">We Are <span class="blue">WEB SOLUTIONZ</span></h1>
+        <p class="section-sub reveal d2" style="margin:0 auto;">A passionate team of developers, designers & strategists helping businesses succeed online.</p>
+      </div>
+    </section>
+    <section class="section" style="background:#fff;">
+      <div class="container">
+        <div class="grid-2">
+          <div class="reveal">
+            <div style="background:linear-gradient(135deg,#eff6ff,#dbeafe);border-radius:20px;padding:32px;border:1px solid #dbeafe;text-align:center;">
+              <div style="font-size:56px;margin-bottom:16px;">🤝</div>
+              <h3 style="font-family:'Fraunces',serif;font-size:1.5rem;margin-bottom:12px;color:#1a1a2e;">Two Partners,<br>One Vision</h3>
+              <p style="font-size:13px;color:#4b5563;line-height:1.85;">We are Haseeb Ahmad and Mujtuba Mazroof — two developers and business partners who came together with a single goal: to help every business get the website they deserve.</p>
+              <div style="margin-top:22px;display:flex;justify-content:center;gap:14px;">
+                <div style="background:#fff;border-radius:12px;padding:14px 20px;box-shadow:0 2px 8px rgba(37,99,235,.08);">
+                  <div style="font-size:22px;margin-bottom:4px;">💻</div>
+                  <div style="font-size:12px;font-weight:700;color:#1a1a2e;">Web Dev</div>
+                </div>
+                <div style="background:#fff;border-radius:12px;padding:14px 20px;box-shadow:0 2px 8px rgba(37,99,235,.08);">
+                  <div style="font-size:22px;margin-bottom:4px;">🎨</div>
+                  <div style="font-size:12px;font-weight:700;color:#1a1a2e;">Design</div>
+                </div>
+                <div style="background:#fff;border-radius:12px;padding:14px 20px;box-shadow:0 2px 8px rgba(37,99,235,.08);">
+                  <div style="font-size:22px;margin-bottom:4px;">📈</div>
+                  <div style="font-size:12px;font-weight:700;color:#1a1a2e;">SEO</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="reveal d2">
+            <div class="label"><span class="label-dot"></span>Our Story</div>
+            <h2 class="section-title">Fresh Start,<br>Big Dreams</h2>
+            <p style="font-size:14px;color:#6b7280;line-height:1.85;margin-bottom:14px;">WEB SOLUTIONZ is a brand new venture started by two passionate web developers — Haseeb Ahmad and Mujtuba Mazroof. We may be new, but our skills, dedication, and hunger to deliver are second to none.</p>
+            <p style="font-size:14px;color:#6b7280;line-height:1.85;margin-bottom:14px;">We believe every business — big or small — deserves a professional online presence. Our goal is simple: build you a website that actually works and brings real results.</p>
+            <p style="font-size:14px;color:#6b7280;line-height:1.85;margin-bottom:24px;">From custom designs to e-commerce stores, hospital websites to school portals — we handle it all with full dedication from day one.</p>
+            <button class="btn btn-primary" onclick="showPage('contact')">Let's Work Together →</button>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- FOUNDERS -->
+    <section class="section" style="background:#fafaf8;">
+      <div class="container">
+        <div class="text-center" style="margin-bottom:52px;">
+          <div class="label reveal"><span class="label-dot"></span>Meet the Founders</div>
+          <h2 class="section-title reveal d1">The People Behind<br><span class="blue">WEB SOLUTIONZ</span></h2>
+          <p class="section-sub reveal d2" style="margin:0 auto;">Two passionate partners on a mission to deliver world-class websites to every business.</p>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:32px;max-width:800px;margin:0 auto;">
+
+          <!-- HASEEB -->
+          <div class="reveal d1" style="background:#fff;border:1px solid #e5e7eb;border-radius:24px;overflow:hidden;box-shadow:0 4px 24px rgba(37,99,235,.07);transition:all .3s;" onmouseover="this.style.transform='translateY(-6px)';this.style.boxShadow='0 20px 50px rgba(37,99,235,.13)'" onmouseout="this.style.transform='none';this.style.boxShadow='0 4px 24px rgba(37,99,235,.07)'">
+            <!-- PHOTO AREA -->
+            <div style="height:260px;background:linear-gradient(135deg,#eff6ff,#dbeafe);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;">
+              <div style="position:absolute;inset:0;background:linear-gradient(180deg,transparent 50%,rgba(37,99,235,.06));"></div>
+              <!-- Profile circle with initials — replace src with real photo -->
+              <div id="haseeb-photo-wrap" style="width:150px;height:150px;border-radius:50%;background:#2563eb;border:4px solid #fff;box-shadow:0 8px 32px rgba(37,99,235,.25);display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative;cursor:pointer;" onclick="document.getElementById('haseeb-upload').click()" title="Click to upload photo">
+                <img id="haseeb-img" src="images/20251205_191521.jpg" alt="Haseeb Ahmad" style="width:100%;height:100%;object-fit:cover;display:block;border-radius:50%;">
+                <div id="haseeb-initials" style="display:none;">HA</div>
+                <div style="position:absolute;inset:0;background:rgba(37,99,235,.5);display:flex;align-items:center;justify-content:center;border-radius:50%;opacity:0;transition:opacity .2s;" id="haseeb-hover">
+                  <span style="color:#fff;font-size:11px;font-weight:700;text-align:center;">📷<br>Upload<br>Photo</span>
+                </div>
+              </div>
+              <input type="file" id="haseeb-upload" accept="image/*" style="display:none;" onchange="loadPhoto(this,'haseeb')">
+              <!-- Hover overlay on circle -->
+              <div style="position:absolute;bottom:12px;right:12px;background:rgba(255,255,255,.9);border-radius:8px;padding:5px 10px;font-size:11px;font-weight:700;color:#2563eb;display:flex;align-items:center;gap:5px;cursor:pointer;" onclick="document.getElementById('haseeb-upload').click"></div>
+            </div>
+            <!-- INFO -->
+            <div style="padding:24px;">
+              <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;">
+                <h3 style="font-family:'Fraunces',serif;font-size:1.3rem;font-weight:700;color:#1a1a2e;">Haseeb Ahmad</h3>
+                <span class="badge badge-blue">Co-Founder</span>
+              </div>
+              <div style="font-size:13px;color:#2563eb;font-weight:700;margin-bottom:12px;">Web Developer & Partner</div>
+              <p style="font-size:13px;color:#6b7280;line-height:1.75;margin-bottom:16px;">Passionate about building clean, high-performance websites. Haseeb leads the development side of WEB SOLUTIONZ with a focus on quality and client satisfaction.</p>
+              <div style="display:flex;gap:7px;flex-wrap:wrap;margin-bottom:16px;">
+                <span class="badge badge-blue" style="font-size:10px;">Web Dev</span>
+                <span class="badge badge-blue" style="font-size:10px;">React</span>
+                <span class="badge badge-blue" style="font-size:10px;">UI Design</span>
+              </div>
+              <div style="display:flex;gap:9px;">
+                <a href="#" style="width:34px;height:34px;border-radius:8px;background:#eff6ff;border:1px solid #dbeafe;display:flex;align-items:center;justify-content:center;text-decoration:none;font-size:14px;transition:all .2s;" onmouseover="this.style.background='#2563eb'" onmouseout="this.style.background='#eff6ff'">💼</a>
+                <a href="#" style="width:34px;height:34px;border-radius:8px;background:#eff6ff;border:1px solid #dbeafe;display:flex;align-items:center;justify-content:center;text-decoration:none;font-size:14px;transition:all .2s;" onmouseover="this.style.background='#2563eb'" onmouseout="this.style.background='#eff6ff'">🐙</a>
+                <a href="https://wa.me/" target="_blank" style="width:34px;height:34px;border-radius:8px;background:#ecfdf5;border:1px solid #a7f3d0;display:flex;align-items:center;justify-content:center;text-decoration:none;font-size:14px;">💬</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- MUJTUBA -->
+          <div class="reveal d2" style="background:#fff;border:1px solid #e5e7eb;border-radius:24px;overflow:hidden;box-shadow:0 4px 24px rgba(37,99,235,.07);transition:all .3s;" onmouseover="this.style.transform='translateY(-6px)';this.style.boxShadow='0 20px 50px rgba(37,99,235,.13)'" onmouseout="this.style.transform='none';this.style.boxShadow='0 4px 24px rgba(37,99,235,.07)'">
+            <!-- PHOTO AREA -->
+            <div style="height:260px;background:linear-gradient(135deg,#f0fdf4,#bbf7d0);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;">
+              <div style="position:absolute;inset:0;background:linear-gradient(180deg,transparent 50%,rgba(22,163,74,.06));"></div>
+              <div id="mujtuba-photo-wrap" style="width:150px;height:150px;border-radius:50%;background:#16a34a;border:4px solid #fff;box-shadow:0 8px 32px rgba(22,163,74,.25);display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative;cursor:pointer;" onclick="document.getElementById('mujtuba-upload').click()" title="Click to upload photo">
+                <img id="mujtuba-img" src="images/1000116936.jpg" alt="Mujtuba Mazroof" style="width:100%;height:100%;object-fit:cover;display:block;border-radius:50%;">
+                <div id="mujtuba-initials" style="font-family:'Fraunces',serif;font-size:2.8rem;font-weight:900;color:#fff;letter-spacing:-1px;display:none;">MM</div>
+                <div style="position:absolute;inset:0;background:rgba(22,163,74,.5);display:flex;align-items:center;justify-content:center;border-radius:50%;opacity:0;transition:opacity .2s;" id="mujtuba-hover">
+                  <span style="color:#fff;font-size:11px;font-weight:700;text-align:center;">📷<br>Upload<br>Photo</span>
+                </div>
+              </div>
+              <input type="file" id="mujtuba-upload" accept="image/*" style="display:none;" onchange="loadPhoto(this,'mujtuba')">
+              <div style="position:absolute;bottom:12px;right:12px;background:rgba(255,255,255,.9);border-radius:8px;padding:5px 10px;font-size:11px;font-weight:700;color:#16a34a;display:flex;align-items:center;gap:5px;cursor:pointer;" onclick="document.getElementById('mujtuba-upload').click()"></div>
+            </div>
+            <!-- INFO -->
+            <div style="padding:24px;">
+              <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;">
+                <h3 style="font-family:'Fraunces',serif;font-size:1.3rem;font-weight:700;color:#1a1a2e;">Mujtuba Mazroof</h3>
+                <span class="badge badge-green">Co-Founder</span>
+              </div>
+              <div style="font-size:13px;color:#16a34a;font-weight:700;margin-bottom:12px;">Web Developer & Partner 
+              </div>
+              <p style="font-size:13px;color:#6b7280;line-height:1.75;margin-bottom:16px;">Passionate about building fast, modern websites. Haseeb handles development and ensures every project is pixel-perfect.</p>
+              <div style="display:flex;gap:7px;flex-wrap:wrap;margin-bottom:16px;">
+                <span class="badge badge-green" style="font-size:10px;">Strategy</span>
+                <span class="badge badge-green" style="font-size:10px;">Client Relations</span>
+                <span class="badge badge-green" style="font-size:10px;">SEO</span>
+              </div>
+              <div style="display:flex;gap:9px;">
+                <a href="#" style="width:34px;height:34px;border-radius:8px;background:#f0fdf4;border:1px solid #bbf7d0;display:flex;align-items:center;justify-content:center;text-decoration:none;font-size:14px;transition:all .2s;">💼</a>
+                <a href="#" style="width:34px;height:34px;border-radius:8px;background:#f0fdf4;border:1px solid #bbf7d0;display:flex;align-items:center;justify-content:center;text-decoration:none;font-size:14px;transition:all .2s;">🐙</a>
+                <a href="https://wa.me/" target="_blank" style="width:34px;height:34px;border-radius:8px;background:#ecfdf5;border:1px solid #a7f3d0;display:flex;align-items:center;justify-content:center;text-decoration:none;font-size:14px;">💬</a>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <!-- photo upload note -->
+        <p class="text-center reveal" style="font-size:12px;color:#9ca3af;margin-top:24px;"> <strong>""</strong></p>
+      </div>
+    </section>
+    <!-- SKILLS -->
+    <section class="section" style="background:#fff;">
+      <div class="container">
+        <div class="grid-2">
+          <div><div class="label reveal"><span class="label-dot"></span>Skills</div><h2 class="section-title reveal d1">Our Technical<br>Expertise</h2><p class="section-sub reveal d2">Staying at the forefront of web technology to deliver the best solutions.</p></div>
+          <div id="skill-bars"></div>
+        </div>
+      </div>
+    </section>
+    <div id="about-footer"></div>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<div id="page-services" class="hidden">
+  <div style="padding-top:66px;">
+    <section class="section" style="background:linear-gradient(150deg,#fafaf8,#eff6ff);padding-top:80px;text-align:center;">
+      <div class="container">
+        <div class="label reveal"><span class="label-dot"></span>Services</div>
+        <h1 class="section-title reveal d1">Solutions for Every<br><span class="blue">Business Need</span></h1>
+        <p class="section-sub reveal d2" style="margin:0 auto;">8 specialized services to help your business grow online.</p>
+      </div>
+    </section>
+    <section class="section" style="background:#fafaf8;padding-top:40px;">
+      <div class="container">
+        <div class="grid-3" id="all-services"></div>
+      </div>
+    </section>
+    <!-- PROCESS -->
+    <section class="section" style="background:#fff;">
+      <div class="container">
+        <div class="text-center" style="margin-bottom:44px;"><div class="label reveal"><span class="label-dot"></span>Process</div><h2 class="section-title reveal d1">How We Work</h2></div>
+        <div class="grid-4">
+          <div class="process-card reveal d1"><div class="process-num">01</div><div style="font-size:28px;margin-bottom:10px;">📞</div><h3 style="font-weight:700;font-size:14px;margin-bottom:7px;">Discovery Call</h3><p style="font-size:12px;color:#6b7280;line-height:1.7;">We understand your business goals in a free 30-min consultation.</p></div>
+          <div class="process-card reveal d2"><div class="process-num">02</div><div style="font-size:28px;margin-bottom:10px;">🎨</div><h3 style="font-weight:700;font-size:14px;margin-bottom:7px;">Design & Plan</h3><p style="font-size:12px;color:#6b7280;line-height:1.7;">We create mockups and a detailed project plan for your approval.</p></div>
+          <div class="process-card reveal d3"><div class="process-num">03</div><div style="font-size:28px;margin-bottom:10px;">💻</div><h3 style="font-weight:700;font-size:14px;margin-bottom:7px;">Development</h3><p style="font-size:12px;color:#6b7280;line-height:1.7;">We build your website with regular updates and demo sessions.</p></div>
+          <div class="process-card reveal d4"><div class="process-num">04</div><div style="font-size:28px;margin-bottom:10px;">🚀</div><h3 style="font-weight:700;font-size:14px;margin-bottom:7px;">Launch & Support</h3><p style="font-size:12px;color:#6b7280;line-height:1.7;">We deploy your site and provide 3 months of free support.</p></div>
+        </div>
+      </div>
+    </section>
+    <div id="services-footer"></div>
+  </div>
+</div>
+
+<!-- PRICING -->
+<div id="page-pricing" class="hidden">
+  <div style="padding-top:66px;">
+    <section class="section" style="background:linear-gradient(150deg,#fafaf8,#eff6ff);padding-top:80px;text-align:center;">
+      <div class="container">
+        <div class="label reveal"><span class="label-dot"></span>Pricing</div>
+        <h1 class="section-title reveal d1">Transparent<br><span class="blue">Pricing Plans</span></h1>
+        <p class="section-sub reveal d2" style="margin:0 auto;">No hidden costs. Choose the plan that fits your needs.</p>
+      </div>
+    </section>
+    <section class="section" style="background:#fafaf8;padding-top:40px;">
+      <div class="container">
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:20px;max-width:920px;margin:0 auto;" id="pricing-cards"></div>
+        <div class="text-center" style="margin-top:28px;"><p style="font-size:13px;color:#9ca3af;">💡 Need custom? <button onclick="showPage('contact')" style="background:none;border:none;cursor:pointer;color:#2563eb;font-weight:700;font-size:13px;">Contact us for a quote →</button></p></div>
+      </div>
+    </section>
+    <!-- FAQ -->
+    <section class="section" style="background:#fff;">
+      <div class="container">
+        <div class="text-center" style="margin-bottom:36px;"><div class="label reveal"><span class="label-dot"></span>FAQ</div><h2 class="section-title reveal d1">Frequently Asked Questions</h2></div>
+        <div style="max-width:660px;margin:0 auto;" id="faq-list"></div>
+      </div>
+    </section>
+    <div id="pricing-footer"></div>
+  </div>
+</div>
+
+<!-- CONTACT -->
+<div id="page-contact" class="hidden">
+  <div style="padding-top:66px;">
+    <section class="section" style="background:linear-gradient(150deg,#fafaf8,#eff6ff);padding-top:80px;text-align:center;">
+      <div class="container">
+        <div class="label reveal"><span class="label-dot"></span>Contact Us</div>
+        <h1 class="section-title reveal d1">Get In <span class="blue">Touch</span></h1>
+        <p class="section-sub reveal d2" style="margin:0 auto;">Reach out to us directly — we'll get back to you within 24 hours!</p>
+      </div>
+    </section>
+
+    <section class="section" style="background:#fafaf8;padding-top:40px;">
+      <div class="container">
+        <div style="max-width:680px;margin:0 auto;">
+
+          <!-- CONTACT CARDS -->
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:18px;margin-bottom:24px;">
+
+            <!-- EMAIL -->
+            <a href="mailto:hmwebsolutionz@gmail.com" class="reveal d1" style="background:#fff;border:1px solid #e5e7eb;border-radius:18px;padding:28px 20px;text-align:center;text-decoration:none;transition:all .3s;box-shadow:0 2px 10px rgba(37,99,235,.06);" onmouseover="this.style.transform='translateY(-5px)';this.style.boxShadow='0 16px 40px rgba(37,99,235,.12)';this.style.borderColor='#bfdbfe'" onmouseout="this.style.transform='none';this.style.boxShadow='0 2px 10px rgba(37,99,235,.06)';this.style.borderColor='#e5e7eb'">
+              <div style="width:54px;height:54px;background:#eff6ff;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:24px;margin:0 auto 14px;">📧</div>
+              <div style="font-size:11px;font-weight:700;color:#9ca3af;text-transform:uppercase;letter-spacing:.07em;margin-bottom:6px;">Email Us</div>
+              <div style="font-size:13px;font-weight:700;color:#1a1a2e;word-break:break-all;">hmwebsolutionz@gmail.com</div>
+              <div style="margin-top:12px;font-size:12px;color:#2563eb;font-weight:600;">Send Email →</div>
+            </a>
+
+            <!-- PHONE 1 -->
+            <a href="tel:+918810454694" class="reveal d2" style="background:#fff;border:1px solid #e5e7eb;border-radius:18px;padding:28px 20px;text-align:center;text-decoration:none;transition:all .3s;box-shadow:0 2px 10px rgba(37,99,235,.06);" onmouseover="this.style.transform='translateY(-5px)';this.style.boxShadow='0 16px 40px rgba(37,99,235,.12)';this.style.borderColor='#bfdbfe'" onmouseout="this.style.transform='none';this.style.boxShadow='0 2px 10px rgba(37,99,235,.06)';this.style.borderColor='#e5e7eb'">
+              <div style="width:54px;height:54px;background:#eff6ff;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:24px;margin:0 auto 14px;">📞</div>
+              <div style="font-size:11px;font-weight:700;color:#9ca3af;text-transform:uppercase;letter-spacing:.07em;margin-bottom:6px;">Haseeb Ahmad</div>
+              <div style="font-size:15px;font-weight:700;color:#1a1a2e;">+91 88104 54694</div>
+              <div style="margin-top:12px;font-size:12px;color:#2563eb;font-weight:600;">Call Now →</div>
+            </a>
+
+            <!-- PHONE 2 -->
+            <a href="tel:+918376063718" class="reveal d3" style="background:#fff;border:1px solid #e5e7eb;border-radius:18px;padding:28px 20px;text-align:center;text-decoration:none;transition:all .3s;box-shadow:0 2px 10px rgba(37,99,235,.06);" onmouseover="this.style.transform='translateY(-5px)';this.style.boxShadow='0 16px 40px rgba(37,99,235,.12)';this.style.borderColor='#bbf7d0'" onmouseout="this.style.transform='none';this.style.boxShadow='0 2px 10px rgba(37,99,235,.06)';this.style.borderColor='#e5e7eb'">
+              <div style="width:54px;height:54px;background:#f0fdf4;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:24px;margin:0 auto 14px;">📱</div>
+              <div style="font-size:11px;font-weight:700;color:#9ca3af;text-transform:uppercase;letter-spacing:.07em;margin-bottom:6px;">Mujtuba Mazroof</div>
+              <div style="font-size:15px;font-weight:700;color:#1a1a2e;">+91 83760 63718</div>
+              <div style="margin-top:12px;font-size:12px;color:#16a34a;font-weight:600;">Call Now →</div>
+            </a>
+
+          </div>
+
+          <!-- WHATSAPP BIG BUTTON -->
+          <a href="https://wa.me/918810454694?text=Hi! I want to discuss a web project." target="_blank" class="reveal" style="display:flex;align-items:center;justify-content:center;gap:14px;background:#25d366;border-radius:16px;padding:22px;text-decoration:none;transition:all .3s;box-shadow:0 6px 24px rgba(37,211,102,.3);margin-bottom:18px;" onmouseover="this.style.transform='translateY(-3px)';this.style.boxShadow='0 12px 36px rgba(37,211,102,.4)'" onmouseout="this.style.transform='none';this.style.boxShadow='0 6px 24px rgba(37,211,102,.3)'">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+            <div>
+              <div style="font-weight:800;font-size:16px;color:#fff;">Chat on WhatsApp</div>
+              <div style="font-size:12px;color:rgba(255,255,255,.85);">Usually replies within minutes — available anytime!</div>
+            </div>
+          </a>
+
+          <!-- EMAIL BIG BUTTON -->
+          <a href="mailto:hmwebsolutionz@gmail.com" class="reveal" style="display:flex;align-items:center;justify-content:center;gap:14px;background:#fff;border:2px solid #dbeafe;border-radius:16px;padding:22px;text-decoration:none;transition:all .3s;box-shadow:0 2px 10px rgba(37,99,235,.06);" onmouseover="this.style.transform='translateY(-3px)';this.style.boxShadow='0 12px 36px rgba(37,99,235,.12)';this.style.borderColor='#93c5fd'" onmouseout="this.style.transform='none';this.style.boxShadow='0 2px 10px rgba(37,99,235,.06)';this.style.borderColor='#dbeafe'">
+            <div style="width:48px;height:48px;background:#2563eb;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;">📧</div>
+            <div>
+              <div style="font-weight:800;font-size:15px;color:#1a1a2e;">Send us an Email</div>
+              <div style="font-size:13px;color:#2563eb;font-weight:600;">hmwebsolutionz@gmail.com</div>
+            </div>
+          </a>
+
+        </div>
+      </div>
+    </section>
+    <div id="contact-footer"></div>
+  </div>
+</div>
+
+<style>
+.social-icon-btn{display:flex;align-items:center;gap:7px;background:#f9fafb;border:1px solid #e5e7eb;border-radius:9px;padding:9px 12px;text-decoration:none;font-size:13px;font-weight:600;color:#374151;transition:all .2s;}
+.social-icon-btn:hover{border-color:#bfdbfe;background:#eff6ff;color:#2563eb;}
+</style>
+
+<script>
+/* ══ DATA ════════════════════════════════════════════════ */
+const SERVICES_DATA = [
+  {e:'💻',t:'Website Development',d:'Full-stack development with React, Next.js, Node.js. Scalable, fast, modern architecture.',f:['Custom React/Next.js apps','RESTful API development','Database design','Performance optimization','Deployment & hosting']},
+  {e:'🎨',t:'Custom Websites',d:'Brand-aligned, conversion-optimized designs. Zero templates — 100% unique to your business.',f:['Custom UI/UX design','Brand identity alignment','Interactive animations','Cross-browser compatible','Figma handoff']},
+  {e:'🔧',t:'Bug Fixing',d:'Quick identification and resolution of bugs, crashes, and performance issues.',f:['Code audit & review','JavaScript/React debugging','Performance profiling','Error tracking setup','Detailed fix report']},
+  {e:'🛡️',t:'Maintenance',d:'Proactive maintenance to keep your website fast, secure, and always up-to-date.',f:['Monthly updates & patches','Daily automated backups','Security monitoring','Uptime monitoring 24/7','Speed optimization']},
+  {e:'📈',t:'SEO Optimization',d:'Data-driven SEO — from technical audits to content optimization for page-one rankings.',f:['Technical SEO audit','Core Web Vitals fixes','Schema markup','Keyword research','Monthly SEO reports']},
+  {e:'🛒',t:'E-commerce Solutions',d:'High-converting online stores with secure payments, inventory management, and smooth checkout.',f:['Product catalog & filters','Razorpay / UPI integration','Cart & wishlist','Order management','Admin dashboard']},
+  {e:'🏫',t:'Educational Websites',d:'Comprehensive portals for schools, colleges, and e-learning platforms with LMS integration.',f:['Student/teacher portals','Course management','Online fee payment','Attendance tracking','Notice board & results']},
+  {e:'🏥',t:'Clinical/Hospital Websites',d:'Professional healthcare websites with appointments, doctor profiles, and patient management.',f:['Online appointment booking','Doctor profile pages','Department listing','Patient portal','Emergency contact widget']},
+];
+
+const BLOG_DATA = [
+  {e:'💼',t:'Why Every Business Needs a Website in 2025',cat:'Business',date:'Jan 15, 2025',read:'5 min',d:'In today\'s digital-first world, not having a website means missing thousands of potential customers.'},
+  {e:'🎨',t:'10 Website Mistakes That Kill Conversions',cat:'Design',date:'Jan 28, 2025',read:'7 min',d:'Common design and UX mistakes that drive visitors away — and how to fix them for better results.'},
+  {e:'📈',t:'How to Rank on Google in 2025: SEO Guide',cat:'SEO',date:'Feb 5, 2025',read:'10 min',d:'A complete guide to modern SEO strategy for Indian businesses — from technical fixes to content.'},
+  {e:'⚛️',t:'React vs WordPress: Which is Better for You?',cat:'Tech',date:'Feb 14, 2025',read:'6 min',d:'A deep comparison to help you choose the right platform for your next project.'},
+  {e:'🛒',t:'E-commerce Trends in India for 2025',cat:'E-commerce',date:'Mar 1, 2025',read:'8 min',d:'The biggest trends shaping Indian e-commerce — from quick commerce to social shopping.'},
+  {e:'⚡',t:'How to Speed Up Your Website (Technical Guide)',cat:'Tech',date:'Mar 8, 2025',read:'9 min',d:'Step-by-step guide to achieving 95+ Google PageSpeed scores and cutting load time in half.'},
+];
+
+const FAQ_DATA = [
+  {q:'How long does it take to build a website?',a:'Most websites take 7–14 days. Complex projects like e-commerce may take 3–6 weeks. We always give you a clear timeline upfront.'},
+  {q:'What is included in the free support period?',a:'During the free support period, we fix bugs, make minor content changes, and answer any questions about your website at no extra cost.'},
+  {q:'Do you provide hosting and domain?',a:'Yes! We help you set up hosting and domain (usually ₹3,000–₹6,000/year). We handle the entire setup and connect it to your website.'},
+  {q:'Can I update my website content myself?',a:'Yes! We integrate a CMS so you can update text, images, and pages yourself without needing a developer.'},
+  {q:'What payment methods do you accept?',a:'UPI, bank transfer, Razorpay (cards, net banking), and PayPal. We ask for 50% upfront and 50% on completion.'},
+];
+
+/* ══ PAGE NAVIGATION ══════════════════════════════════════ */
+const PAGES = ['home','about','services','pricing','contact'];
+
+function showPage(name) {
+  PAGES.forEach(p => {
+    const el = document.getElementById('page-' + p);
+    if (el) el.classList.toggle('hidden', p !== name);
+  });
+  document.querySelectorAll('.nav-link').forEach((el, i) => {
+    el.classList.toggle('active', PAGES[i] === name);
+  });
+  closeMob();
+  window.scrollTo({top: 0, behavior: 'smooth'});
+  setTimeout(initReveal, 100);
+  if (name === 'about') initSkillBars();
+}
+
+/* ══ MOBILE MENU ══════════════════════════════════════════ */
+function openMob() { document.getElementById('mobile-menu').classList.add('open'); }
+function closeMob() { document.getElementById('mobile-menu').classList.remove('open'); }
+
+/* ══ SCROLL ══════════════════════════════════════════════ */
+window.addEventListener('scroll', () => {
+  document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 20);
+  initReveal();
+});
+
+function initReveal() {
+  document.querySelectorAll('.reveal:not(.show)').forEach(el => {
+    const r = el.getBoundingClientRect();
+    if (r.top < window.innerHeight - 60) el.classList.add('show');
+  });
+}
+
+/* ══ RENDER FUNCTIONS ════════════════════════════════════ */
+function renderFooter(id) {
+  const el = document.getElementById(id);
+  if (!el || el.innerHTML) return;
+  el.innerHTML = `
+  <footer style="background:#1a1a2e;color:#fff;padding:56px 5% 24px;">
+    <div style="max-width:1160px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(185px,1fr));gap:32px;margin-bottom:40px;">
+      <div>
+        <div style="font-weight:800;font-size:19px;margin-bottom:12px;">WEB <span style="color:#60a5fa;">SOLUTIONZ</span></div>
+        <p style="font-size:13px;color:rgba(255,255,255,.5);line-height:1.75;max-width:240px;margin-bottom:16px;">We build modern websites that help businesses grow online. From concept to launch.</p>
+        <a href="#" class="social-btn">GH</a><a href="#" class="social-btn">LI</a><a href="#" class="social-btn">IG</a>
+      </div>
+      <div>
+        <div class="f-head">Quick Links</div>
+        ${PAGES.map(p=>`<button class="f-link" onclick="showPage('${p}')">${p.charAt(0).toUpperCase()+p.slice(1)}</button>`).join('')}
+      </div>
+      <div>
+        <div class="f-head">Services</div>
+        ${['Website Dev','Custom Design','SEO','E-commerce','Bug Fixing','Maintenance','Educational','Hospital'].map(s=>`<div style="font-size:13px;color:rgba(255,255,255,.5);margin-bottom:8px;">${s}</div>`).join('')}
+      </div>
+      <div>
+        <div class="f-head">Contact</div>
+        <div style="font-size:13px;color:rgba(255,255,255,.5);margin-bottom:10px;">📧 hmwebsolutionz@gmail.com</div>
+        <div style="font-size:13px;color:rgba(255,255,255,.5);margin-bottom:10px;">📞 +91 88104 54694</div>
+        <div style="font-size:13px;color:rgba(255,255,255,.5);margin-bottom:18px;">📞 +91 83760 63718</div>
+        <button class="btn btn-primary btn-sm" onclick="showPage('contact')">Get Quote →</button>
+      </div>
+    </div>
+    <div style="max-width:1160px;margin:0 auto;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;padding-top:20px;border-top:1px solid rgba(255,255,255,.08);">
+      <p style="font-size:12px;color:rgba(255,255,255,.3);">© ${new Date().getFullYear()} WEB SOLUTIONZ. All rights reserved.</p>
+      <p style="font-size:12px;color:rgba(255,255,255,.3);">Privacy · Terms</p>
+    </div>
+  </footer>`;
+}
+
+function renderServices() {
+  const el = document.getElementById('all-services');
+  if (!el || el.innerHTML) return;
+  el.innerHTML = SERVICES_DATA.map((s,i)=>`
+  <div class="card reveal" style="transition-delay:${(i%3)*0.08}s">
+    <div class="icon-box" style="font-size:22px;">${s.e}</div>
+    <h3 style="font-weight:700;font-size:15px;margin-bottom:7px;">${s.t}</h3>
+    <p style="font-size:13px;color:#6b7280;line-height:1.7;margin-bottom:14px;">${s.d}</p>
+    <div style="border-top:1px solid #f3f4f6;padding-top:12px;">
+      ${s.f.map(f=>`<div style="display:flex;align-items:center;gap:7px;margin-bottom:7px;"><div style="width:16px;height:16px;border-radius:50%;background:#eff6ff;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:9px;color:#2563eb;">✓</div><span style="font-size:12px;color:#4b5563;font-weight:500;">${f}</span></div>`).join('')}
+    </div>
+    <button class="btn btn-primary btn-full btn-sm" onclick="showPage('contact')" style="margin-top:14px;">Get Quote →</button>
+  </div>`).join('');
+  setTimeout(initReveal, 50);
+}
+
+function renderPricing() {
+  const el = document.getElementById('pricing-cards');
+  if (!el || el.innerHTML) return;
+  const plans = [
+    {n:'Starter',p:'₹7,999',badge:'',desc:'For small businesses & startups',featured:false,f:['5-page custom website','Mobile responsive design','Contact form setup','Basic SEO setup','Free domain connection']},
+    {n:'Business',p:'₹13,999',badge:'Most Popular',desc:'Ideal for growing businesses',featured:true,f:['Up to 15 pages','Advanced UI/UX design','CMS / Blog integration','Full SEO optimization','WhatsApp & chat widget','Google Analytics setup','Speed optimization']},
+    {n:'Enterprise',p:'₹19,000',badge:'',desc:'For large & custom projects',featured:false,f:['Unlimited pages','Custom web application','E-commerce / payment','Advanced SEO & marketing','Admin dashboard & CRM','6 months free support','Priority response','Training & handover']},
+  ];
+  el.innerHTML = plans.map(p=>`
+  <div class="price-card ${p.featured?'featured':''}" style="${p.featured?'transform:scale(1.03);':''}">
+    ${p.badge?`<span class="badge badge-blue" style="margin-bottom:10px;display:inline-flex;">${p.badge}</span>`:'<div style="height:26px;"></div>'}
+    <div style="font-weight:700;font-size:12px;${p.featured?'color:rgba(255,255,255,.6);':'color:#6b7280;'}margin-bottom:4px;text-transform:uppercase;letter-spacing:.06em;">${p.n}</div>
+    <div class="price-val" style="${p.featured?'color:#fff;':'color:#1a1a2e;'}margin-bottom:3px;">${p.p}</div>
+    <div style="font-size:12px;${p.featured?'color:rgba(255,255,255,.5);':'color:#9ca3af;'}margin-bottom:10px;">one-time</div>
+    <div style="font-size:13px;${p.featured?'color:rgba(255,255,255,.65);':'color:#6b7280;'}margin-bottom:18px;padding-bottom:16px;border-bottom:1px solid ${p.featured?'rgba(255,255,255,.12)':'#f3f4f6'};">${p.desc}</div>
+    ${p.f.map(f=>`<div class="check-row"><div class="check-circle" style="background:${p.featured?'rgba(255,255,255,.15)':'#eff6ff'};color:${p.featured?'#fff':'#2563eb'};">✓</div><span style="font-size:13px;${p.featured?'color:rgba(255,255,255,.8);':'color:#4b5563;'}font-weight:500;">${f}</span></div>`).join('')}
+    <button class="btn btn-full" onclick="showPage('contact')" style="margin-top:20px;background:${p.featured?'#fff':'#2563eb'};color:${p.featured?'#1a1a2e':'#fff'};border:none;padding:12px;border-radius:10px;font-family:inherit;font-weight:700;font-size:13px;cursor:pointer;">Get Started →</button>
+  </div>`).join('');
+}
+
+function renderFAQ() {
+  const el = document.getElementById('faq-list');
+  if (!el || el.innerHTML) return;
+  el.innerHTML = FAQ_DATA.map((f,i)=>`
+  <div class="faq-item" onclick="toggleFAQ(${i})">
+    <div class="faq-q">${f.q}<span id="faq-icon-${i}" style="color:#2563eb;font-size:18px;transition:transform .2s;flex-shrink:0;">+</span></div>
+    <div class="faq-a" id="faq-a-${i}">${f.a}</div>
+  </div>`).join('');
+}
+
+function toggleFAQ(i) {
+  const a = document.getElementById('faq-a-'+i);
+  const ic = document.getElementById('faq-icon-'+i);
+  const isOpen = a.classList.contains('open');
+  document.querySelectorAll('.faq-a').forEach(el=>el.classList.remove('open'));
+  document.querySelectorAll('[id^="faq-icon-"]').forEach(el=>{el.textContent='+';el.style.transform='none';});
+  if (!isOpen) { a.classList.add('open'); ic.textContent='−'; }
+}
+
+function renderBlog() {
+  const el = document.getElementById('blog-grid');
+  if (!el || el.innerHTML) return;
+  el.innerHTML = BLOG_DATA.map((p,i)=>`
+  <div class="card reveal" style="transition-delay:${(i%3)*0.08}s;cursor:pointer;">
+    <div style="height:130px;background:#eff6ff;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:48px;margin-bottom:14px;">${p.e}</div>
+    <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;flex-wrap:wrap;">
+      <span class="badge badge-blue" style="font-size:10px;">${p.cat}</span>
+      <span style="font-size:11px;color:#9ca3af;">${p.date}</span>
+      <span style="font-size:11px;color:#9ca3af;">· ${p.read} read</span>
+    </div>
+    <h3 style="font-weight:700;font-size:14px;margin-bottom:7px;color:#1a1a2e;line-height:1.4;">${p.t}</h3>
+    <p style="font-size:12px;color:#6b7280;line-height:1.7;margin-bottom:12px;">${p.d}</p>
+    <span style="color:#2563eb;font-size:13px;font-weight:700;">Read Article →</span>
+  </div>`).join('');
+  setTimeout(initReveal, 50);
+}
+
+function renderWhy() {
+  const list = document.getElementById('why-list');
+  if (!list || list.innerHTML) return;
+  ['Fast delivery — most projects in 7–14 days','Mobile-first, SEO-optimized from day one','Free domain & hosting setup included','3 months free support after launch','Transparent pricing, no hidden costs','Dedicated project manager for your account'].forEach(item=>{
+    list.innerHTML+=`<div style="display:flex;align-items:flex-start;gap:9px;margin-bottom:10px;"><div style="width:18px;height:18px;border-radius:50%;background:#eff6ff;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:10px;color:#2563eb;margin-top:1px;">✓</div><span style="font-size:14px;color:#374151;font-weight:500;">${item}</span></div>`;
+  });
+  const cards = document.getElementById('why-cards');
+  if (!cards || cards.innerHTML) return;
+  [{e:'⚡',t:'97+ Perf Score',d:'Lightning fast loading',bg:'#eff6ff'},{e:'👥',t:'Client-First',d:'Your success is our goal',bg:'#fffbeb'},{e:'🔒',t:'Secure & Safe',d:'SSL, backups, protection',bg:'#f0fdf4'},{e:'⏰',t:'On-Time Always',d:'Never miss a deadline',bg:'#fdf2f8'}].forEach(w=>{
+    cards.innerHTML+=`<div style="background:${w.bg};border-radius:14px;padding:18px;"><div style="width:38px;height:38px;background:#fff;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:18px;margin-bottom:9px;box-shadow:0 2px 8px rgba(0,0,0,.07);">${w.e}</div><div style="font-weight:700;font-size:13px;margin-bottom:3px;">${w.t}</div><div style="font-size:12px;color:#6b7280;">${w.d}</div></div>`;
+  });
+}
+
+function renderTestimonials() {
+  const el = document.getElementById('testimonials');
+  if (!el || el.innerHTML) return;
+  [{n:'Rajesh Kumar',r:'MD, Kumar Pharma',t:'WEB SOLUTIONZ transformed our online presence. Sales went up 240% within 3 months of the new website!',s:5},{n:'Priya Sharma',r:'Founder, LearningHub',t:'The educational portal they built is outstanding. Students love the interface and our enrollment doubled.',s:5},{n:'Dr. Amit Singh',r:'Director, CityClinic',t:'Our hospital website with online booking has been a game-changer. Highly professional team!',s:5}].forEach((tm,i)=>{
+    el.innerHTML+=`<div class="testi-card reveal d${i+1}"><div class="quote">"</div><div style="display:flex;gap:2px;margin-bottom:10px;">${'⭐'.repeat(tm.s)}</div><p style="font-size:13px;color:#374151;line-height:1.75;margin-bottom:14px;font-style:italic;">"${tm.t}"</p><div style="border-top:1px solid #f3f4f6;padding-top:12px;display:flex;align-items:center;gap:9px;"><div style="width:34px;height:34px;border-radius:50%;background:#eff6ff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;color:#2563eb;">${tm.n[0]}</div><div><div style="font-weight:700;font-size:13px;">${tm.n}</div><div style="font-size:11px;color:#9ca3af;">${tm.r}</div></div></div></div>`;
+  });
+}
+
+function renderHeroMetrics() {
+  const el = document.getElementById('metrics');
+  if (!el) return;
+  [{l:'Performance Score',v:97,c:'#16a34a'},{l:'SEO Score',v:94,c:'#2563eb'},{l:'Mobile Friendly',v:100,c:'#7c3aed'}].forEach(m=>{
+    el.innerHTML+=`<div style="margin-bottom:12px;"><div style="display:flex;justify-content:space-between;font-size:12px;font-weight:600;margin-bottom:5px;"><span style="color:#374151;">${m.l}</span><span style="color:${m.c};">${m.v}/100</span></div><div class="metric-bar-track"><div style="height:100%;width:${m.v}%;background:${m.c};border-radius:3px;"></div></div></div>`;
+  });
+}
+
+function initSkillBars() {
+  const el = document.getElementById('skill-bars');
+  if (!el || el.innerHTML) return;
+  [['React / Next.js',96],['UI/UX Design',92],['Node.js / Backend',88],['SEO & Analytics',90],['E-commerce Dev',85],['Mobile Responsive',98]].forEach(([n,v])=>{
+    el.innerHTML+=`<div style="margin-bottom:16px;" class="reveal"><div style="display:flex;justify-content:space-between;font-size:13px;font-weight:600;margin-bottom:5px;"><span>${n}</span><span style="color:#2563eb;">${v}%</span></div><div class="sk-track"><div class="sk-fill" style="width:0%" data-w="${v}%"></div></div></div>`;
+  });
+  setTimeout(()=>{
+    document.querySelectorAll('.sk-fill').forEach((bar,i)=>{
+      setTimeout(()=>bar.style.width=bar.dataset.w, i*100+200);
+    });
+    initReveal();
+  }, 100);
+}
+
+/* ══ CONTACT FORM ══════════════════════════════════════════ */
+function submitForm() {
+  const n=document.getElementById('cf-name').value;
+  const e=document.getElementById('cf-email').value;
+  const m=document.getElementById('cf-msg').value;
+  if(!n||!e||!m){alert('Please fill in Name, Email, and Message.');return;}
+  const btn=document.getElementById('cf-submit');
+  btn.textContent='Sending...';btn.disabled=true;
+  setTimeout(()=>{
+    document.getElementById('cf-submit').style.display='none';
+    document.getElementById('cf-success').style.display='block';
+    document.querySelectorAll('#contact-form-wrap .contact-input').forEach(i=>i.style.display='none');
+    document.querySelectorAll('#contact-form-wrap label').forEach(l=>l.style.display='none');
+    document.querySelectorAll('#contact-form-wrap h2')[0].style.display='none';
+  },1800);
+}
+function resetForm() {
+  ['cf-name','cf-email','cf-phone','cf-msg'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});
+  document.getElementById('cf-success').style.display='none';
+  document.getElementById('cf-submit').style.display='flex';
+  document.getElementById('cf-submit').textContent='Send My Request →';
+  document.getElementById('cf-submit').disabled=false;
+  document.querySelectorAll('#contact-form-wrap .contact-input').forEach(i=>i.style.display='');
+  document.querySelectorAll('#contact-form-wrap label').forEach(l=>l.style.display='');
+  document.querySelectorAll('#contact-form-wrap h2')[0].style.display='';
+}
+
+function loadPhotoHome(input, name) {
+  const file = input.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    const img = document.getElementById(name + '-img-home');
+    const init = document.getElementById(name + '-init-home');
+    img.src = e.target.result;
+    img.style.display = 'block';
+    init.style.display = 'none';
+  };
+  reader.readAsDataURL(file);
+}
+
+
+function loadPhoto(input, name) {
+  const file = input.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    const img = document.getElementById(name + '-img');
+    const initials = document.getElementById(name + '-initials');
+    img.src = e.target.result;
+    img.style.display = 'block';
+    initials.style.display = 'none';
+  };
+  reader.readAsDataURL(file);
+}
+
+/* ══ INIT ════════════════════════════════════════════════ */
+window.addEventListener('load', ()=>{
+  renderFooter('home-footer'); renderFooter('about-footer'); renderFooter('services-footer');
+  renderFooter('pricing-footer'); renderFooter('blog-footer'); renderFooter('contact-footer');
+  renderHeroMetrics(); renderWhy();
+  renderServices(); renderPricing(); renderFAQ();
+  setTimeout(initReveal, 300);
+});
+</script>
+</body>
+</html>
