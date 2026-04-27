@@ -53,6 +53,22 @@ body{font-family:'Plus Jakarta Sans',Arial,sans-serif;background:#fff;color:#1a1
 .icon-box{width:50px;height:50px;background:var(--blue-pale);border-radius:12px;display:flex;align-items:center;justify-content:center;color:var(--blue);margin-bottom:16px;transition:all .3s;font-size:22px;}
 .card:hover .icon-box{background:var(--blue);color:#fff;}
 
+/* â”€â”€ PORTFOLIO â”€â”€ */
+.portfolio-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:24px;}
+.project-card{display:block;text-decoration:none;color:inherit;position:relative;transition:transform .3s ease,box-shadow .3s ease;transform-origin:center;cursor:pointer;}
+.project-card:hover{transform:scale(1.1);z-index:2;box-shadow:0 28px 70px rgba(37,99,235,.18);}
+.project-media{position:relative;overflow:hidden;border-radius:24px;background:linear-gradient(135deg,#eff6ff,#fff);aspect-ratio:4/3;border:1px solid var(--border);}
+.project-image{width:100%;height:100%;object-fit:cover;display:block;transition:opacity .3s ease,transform .3s ease;}
+.project-card:hover .project-image{opacity:.35;transform:scale(1.08);}
+.project-overlay{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;gap:8px;padding:24px;color:#fff;background:linear-gradient(180deg,rgba(15,23,42,0) 0%,rgba(15,23,42,.18) 44%,rgba(15,23,42,.82) 100%);opacity:0;transition:opacity .3s ease;}
+.project-card:hover .project-overlay{opacity:1;}
+.project-category{display:inline-flex;align-self:flex-start;background:rgba(255,255,255,.14);backdrop-filter:blur(8px);padding:5px 11px;border-radius:999px;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;}
+.project-name{font-family:'Fraunces',serif;font-size:1.4rem;font-weight:900;line-height:1.1;}
+.project-cta{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.8);}
+.project-meta{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:14px 4px 0;}
+.project-host{font-size:11px;font-weight:700;color:var(--gray);letter-spacing:.08em;text-transform:uppercase;}
+.project-arrow{min-width:56px;height:32px;padding:0 12px;border-radius:999px;display:flex;align-items:center;justify-content:center;background:var(--blue-pale);color:var(--blue);flex-shrink:0;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;}
+
 /* ── BADGE ── */
 .badge{display:inline-flex;align-items:center;gap:4px;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:700;}
 .badge-blue{background:var(--blue-pale);color:var(--blue);border:1px solid var(--blue-mid);}
@@ -223,6 +239,7 @@ footer{background:var(--navy);color:#fff;padding:60px 5% 26px;}
       <button class="nav-link active" onclick="showPage('home')">Home</button>
       <button class="nav-link" onclick="showPage('about')">About</button>
       <button class="nav-link" onclick="showPage('services')">Services</button>
+      <button class="nav-link" onclick="showPage('portfolio')">Portfolio</button>
       <button class="nav-link" onclick="showPage('pricing')">Pricing</button>
       
       <button class="nav-link" onclick="showPage('contact')">Contact</button>
@@ -241,6 +258,7 @@ footer{background:var(--navy);color:#fff;padding:60px 5% 26px;}
   <button class="mob-link" onclick="showPage('home')">Home</button>
   <button class="mob-link" onclick="showPage('about')">About</button>
   <button class="mob-link" onclick="showPage('services')">Services</button>
+  <button class="mob-link" onclick="showPage('portfolio')">Portfolio</button>
   <button class="mob-link" onclick="showPage('pricing')">Pricing</button>
   
   <button class="mob-link" onclick="showPage('contact')">Contact</button>
@@ -270,6 +288,7 @@ footer{background:var(--navy);color:#fff;padding:60px 5% 26px;}
         <div class="flex reveal d3" style="gap:12px;flex-wrap:wrap;">
           <button class="btn btn-primary" onclick="showPage('contact')">Get Free Quote →</button>
           <button class="btn btn-outline" onclick="showPage('services')">View Our Services →</button>
+          <button class="btn btn-outline" onclick="showPage('portfolio')">View Portfolio →</button>
         </div>
 
       </div>
@@ -599,6 +618,28 @@ footer{background:var(--navy);color:#fff;padding:60px 5% 26px;}
   </div>
 </div>
 
+<!-- PORTFOLIO -->
+<div id="page-portfolio" class="hidden">
+  <div style="padding-top:66px;">
+    <section class="section" style="background:linear-gradient(150deg,#fafaf8,#eff6ff);padding-top:80px;text-align:center;">
+      <div class="container">
+        <div class="label reveal"><span class="label-dot"></span>Portfolio</div>
+        <h1 class="section-title reveal d1">Projects We Built<br><span class="blue">for Real Clients</span></h1>
+        <p class="section-sub reveal d2" style="margin:0 auto;">A look at the live websites we have delivered. Hover a card to preview the project and click to open it.</p>
+      </div>
+    </section>
+    <section class="section" style="background:#fafaf8;padding-top:40px;">
+      <div class="container">
+        <div class="portfolio-grid" id="portfolio-grid"></div>
+        <div class="text-center" style="margin-top:28px;">
+          <p style="font-size:13px;color:#9ca3af;">Want a similar website? <button onclick="showPage('contact')" style="background:none;border:none;cursor:pointer;color:#2563eb;font-weight:700;font-size:13px;">Let us build yours -></button></p>
+        </div>
+      </div>
+    </section>
+    <div id="portfolio-footer"></div>
+  </div>
+</div>
+
 <!-- PRICING -->
 <div id="page-pricing" class="hidden">
   <div style="padding-top:66px;">
@@ -611,7 +652,7 @@ footer{background:var(--navy);color:#fff;padding:60px 5% 26px;}
     </section>
     <section class="section" style="background:#fafaf8;padding-top:40px;">
       <div class="container">
-        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:20px;max-width:920px;margin:0 auto;" id="pricing-cards"></div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px;max-width:1160px;margin:0 auto;" id="pricing-cards"></div>
         <div class="text-center" style="margin-top:28px;"><p style="font-size:13px;color:#9ca3af;">💡 Need custom? <button onclick="showPage('contact')" style="background:none;border:none;cursor:pointer;color:#2563eb;font-weight:700;font-size:13px;">Contact us for a quote →</button></p></div>
       </div>
     </section>
@@ -730,8 +771,35 @@ const FAQ_DATA = [
   {q:'What payment methods do you accept?',a:'UPI, bank transfer, Razorpay (cards, net banking), and PayPal. We ask for 50% upfront and 50% on completion.'},
 ];
 
+const PORTFOLIO_DATA = [
+  {
+    name: 'Sayyed Online Quraan Academy',
+    url: 'https://sayyedonlinequraanacademy.com/',
+    category: 'Education',
+    subtitle: 'Academy website with a clean presentation and easy contact flow.',
+    accent: '#0f766e',
+    base: '#ecfeff',
+  },
+  {
+    name: 'Salah Timings WebApp',
+    url: 'https://salah-timings-webapp.vercel.app/',
+    category: 'Utility App',
+    subtitle: 'A focused web app built for prayer-time access and daily utility.',
+    accent: '#1d4ed8',
+    base: '#eff6ff',
+  },
+  {
+    name: 'The Knowledge Haven',
+    url: 'https://the-knowledge-haven.vercel.app/',
+    category: 'Learning',
+    subtitle: 'A content-rich experience made for reading, discovery, and learning.',
+    accent: '#7c3aed',
+    base: '#f5f3ff',
+  },
+];
+
 /* ══ PAGE NAVIGATION ══════════════════════════════════════ */
-const PAGES = ['home','about','services','pricing','contact'];
+const PAGES = ['home','about','services','portfolio','pricing','contact'];
 
 function showPage(name) {
   PAGES.forEach(p => {
@@ -799,6 +867,107 @@ function renderFooter(id) {
   </footer>`;
 }
 
+function escapeSvgText(text) {
+  return String(text)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&apos;');
+}
+
+function wrapSvgText(text, maxLength) {
+  const words = String(text).split(/\s+/);
+  const lines = [];
+  let currentLine = '';
+  words.forEach(word => {
+    const candidateLine = currentLine ? `${currentLine} ${word}` : word;
+    if (candidateLine.length <= maxLength) {
+      currentLine = candidateLine;
+      return;
+    }
+    if (currentLine) lines.push(currentLine);
+    currentLine = word;
+  });
+  if (currentLine) lines.push(currentLine);
+  return lines.slice(0, 3);
+}
+
+function createProjectPreview(project) {
+  const safeId = project.name.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+  const titleLines = wrapSvgText(project.name, 20).map((line, index) =>
+    `<tspan x="120" dy="${index === 0 ? 0 : 64}">${escapeSvgText(line)}</tspan>`
+  ).join('');
+  const subtitleLines = wrapSvgText(project.subtitle, 34).map((line, index) =>
+    `<tspan x="120" dy="${index === 0 ? 0 : 30}">${escapeSvgText(line)}</tspan>`
+  ).join('');
+  const svg = `
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" role="img" aria-label="${escapeSvgText(project.name)}">
+    <defs>
+      <linearGradient id="bg-${safeId}" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="${project.base}"/>
+        <stop offset="100%" stop-color="#ffffff"/>
+      </linearGradient>
+      <linearGradient id="accent-${safeId}" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="${project.accent}"/>
+        <stop offset="100%" stop-color="#60a5fa"/>
+      </linearGradient>
+    </defs>
+    <rect width="1200" height="900" rx="48" fill="url(#bg-${safeId})"/>
+    <circle cx="980" cy="170" r="150" fill="${project.accent}" fill-opacity=".12"/>
+    <circle cx="180" cy="760" r="170" fill="${project.accent}" fill-opacity=".10"/>
+    <rect x="90" y="100" width="1020" height="700" rx="36" fill="rgba(255,255,255,.72)" stroke="rgba(255,255,255,.85)" stroke-width="3"/>
+    <rect x="120" y="130" width="960" height="44" rx="16" fill="rgba(15,23,42,.06)"/>
+    <circle cx="156" cy="152" r="7" fill="${project.accent}"/>
+    <circle cx="184" cy="152" r="7" fill="#f59e0b"/>
+    <circle cx="212" cy="152" r="7" fill="#22c55e"/>
+    <rect x="120" y="208" width="260" height="18" rx="9" fill="rgba(15,23,42,.10)"/>
+    <rect x="120" y="248" width="460" height="22" rx="11" fill="rgba(15,23,42,.16)"/>
+    <rect x="120" y="286" width="320" height="18" rx="9" fill="rgba(15,23,42,.10)"/>
+    <rect x="120" y="360" width="420" height="248" rx="28" fill="url(#accent-${safeId})"/>
+    <rect x="580" y="360" width="400" height="112" rx="24" fill="rgba(255,255,255,.88)"/>
+    <rect x="580" y="492" width="400" height="116" rx="24" fill="rgba(255,255,255,.88)"/>
+    <rect x="580" y="628" width="400" height="70" rx="22" fill="${project.accent}" fill-opacity=".14"/>
+    <text x="120" y="706" fill="${project.accent}" font-family="Arial, sans-serif" font-size="26" font-weight="700">${escapeSvgText(project.category)}</text>
+    <text x="120" y="260" fill="#0f172a" font-family="Fraunces, Georgia, serif" font-size="58" font-weight="900">${titleLines}</text>
+    <text x="120" y="596" fill="#ffffff" font-family="Arial, sans-serif" font-size="24" font-weight="700">Live Project Preview</text>
+    <text x="612" y="425" fill="#0f172a" font-family="Arial, sans-serif" font-size="22" font-weight="700">Responsive Design</text>
+    <text x="612" y="455" fill="#6b7280" font-family="Arial, sans-serif" font-size="16" font-weight="400">Built for mobile and desktop screens</text>
+    <text x="612" y="557" fill="#0f172a" font-family="Arial, sans-serif" font-size="22" font-weight="700">Modern UI</text>
+    <text x="612" y="587" fill="#6b7280" font-family="Arial, sans-serif" font-size="16" font-weight="400">Fast, clean, and conversion focused</text>
+    <text x="612" y="672" fill="${project.accent}" font-family="Arial, sans-serif" font-size="18" font-weight="700">Project snapshot</text>
+    <text x="120" y="760" fill="#475569" font-family="Arial, sans-serif" font-size="18" font-weight="400">${subtitleLines}</text>
+  </svg>`;
+  return `data:image/svg+xml;charset=UTF-8,${encodeURIComponent(svg)}`;
+}
+
+function renderPortfolio() {
+  const el = document.getElementById('portfolio-grid');
+  if (!el || el.innerHTML) return;
+  el.innerHTML = PORTFOLIO_DATA.map((project, index) => {
+    const hostName = project.url.startsWith('http') ? new URL(project.url).hostname : 'Local project';
+    return `
+    <a class="project-card reveal d${(index % 4) + 1}" href="${project.url}" target="_blank" rel="noopener noreferrer">
+      <div class="project-media">
+        <img class="project-image" src="${createProjectPreview(project)}" alt="${project.name}">
+        <div class="project-overlay">
+          <span class="project-category">${project.category}</span>
+          <div class="project-name">${project.name}</div>
+          <div class="project-cta">click to view</div>
+        </div>
+      </div>
+      <div class="project-meta">
+        <div>
+          <div style="font-size:14px;font-weight:700;color:#1a1a2e;line-height:1.35;margin-bottom:4px;">${project.name}</div>
+          <div class="project-host">${hostName}</div>
+        </div>
+        <div class="project-arrow">Open</div>
+      </div>
+    </a>`;
+  }).join('');
+  setTimeout(initReveal, 50);
+}
+
 function renderServices() {
   const el = document.getElementById('all-services');
   if (!el || el.innerHTML) return;
@@ -819,16 +988,17 @@ function renderPricing() {
   const el = document.getElementById('pricing-cards');
   if (!el || el.innerHTML) return;
   const plans = [
-    {n:'Starter',p:'₹7,999',badge:'',desc:'For small businesses & startups',featured:false,f:['5-page custom website','Mobile responsive design','Contact form setup','Basic SEO setup','Free domain connection']},
-    {n:'Business',p:'₹13,999',badge:'Most Popular',desc:'Ideal for growing businesses',featured:true,f:['Up to 15 pages','Advanced UI/UX design','CMS / Blog integration','Full SEO optimization','WhatsApp & chat widget','Google Analytics setup','Speed optimization']},
-    {n:'Enterprise',p:'₹19,000',badge:'',desc:'For large & custom projects',featured:false,f:['Unlimited pages','Custom web application','E-commerce / payment','Advanced SEO & marketing','Admin dashboard & CRM','6 months free support','Priority response','Training & handover']},
+    {n:'Basic',p:'₹7,999',badge:'',desc:'For small businesses and launch websites',featured:false,f:['5-page custom website','Mobile responsive design','Contact form setup','Basic SEO setup','Free domain connection']},
+    {n:'Standard',p:'₹13,999',badge:'Popular',desc:'Ideal for growing brands that need more features',featured:false,f:['Up to 10 pages','Advanced UI/UX design','CMS / Blog integration','WhatsApp chat widget','Google Analytics setup','Speed optimization']},
+    {n:'Business',p:'₹19,000',badge:'Most Popular',desc:'Built for businesses that want a strong digital presence',featured:true,f:['Up to 15 pages','Advanced SEO setup','Payment / booking integration','Lead forms and automation','Priority support','Training & handover']},
+    {n:'Custom Pricing',p:'Quote',badge:'Tailored',desc:'For CRM, AI bot integration, dashboards, portals, and advanced websites',featured:false,f:['Custom website architecture','CRM development','AI bot integration','API and third-party integrations','Admin dashboards','Scalable solution planning']},
   ];
   el.innerHTML = plans.map(p=>`
   <div class="price-card ${p.featured?'featured':''}" style="${p.featured?'transform:scale(1.03);':''}">
     ${p.badge?`<span class="badge badge-blue" style="margin-bottom:10px;display:inline-flex;">${p.badge}</span>`:'<div style="height:26px;"></div>'}
     <div style="font-weight:700;font-size:12px;${p.featured?'color:rgba(255,255,255,.6);':'color:#6b7280;'}margin-bottom:4px;text-transform:uppercase;letter-spacing:.06em;">${p.n}</div>
     <div class="price-val" style="${p.featured?'color:#fff;':'color:#1a1a2e;'}margin-bottom:3px;">${p.p}</div>
-    <div style="font-size:12px;${p.featured?'color:rgba(255,255,255,.5);':'color:#9ca3af;'}margin-bottom:10px;">one-time</div>
+    <div style="font-size:12px;${p.featured?'color:rgba(255,255,255,.5);':'color:#9ca3af;'}margin-bottom:10px;">${p.n === 'Custom Pricing' ? 'based on scope' : 'one-time'}</div>
     <div style="font-size:13px;${p.featured?'color:rgba(255,255,255,.65);':'color:#6b7280;'}margin-bottom:18px;padding-bottom:16px;border-bottom:1px solid ${p.featured?'rgba(255,255,255,.12)':'#f3f4f6'};">${p.desc}</div>
     ${p.f.map(f=>`<div class="check-row"><div class="check-circle" style="background:${p.featured?'rgba(255,255,255,.15)':'#eff6ff'};color:${p.featured?'#fff':'#2563eb'};">✓</div><span style="font-size:13px;${p.featured?'color:rgba(255,255,255,.8);':'color:#4b5563;'}font-weight:500;">${f}</span></div>`).join('')}
     <button class="btn btn-full" onclick="showPage('contact')" style="margin-top:20px;background:${p.featured?'#fff':'#2563eb'};color:${p.featured?'#1a1a2e':'#fff'};border:none;padding:12px;border-radius:10px;font-family:inherit;font-weight:700;font-size:13px;cursor:pointer;">Get Started →</button>
@@ -974,9 +1144,9 @@ function loadPhoto(input, name) {
 /* ══ INIT ════════════════════════════════════════════════ */
 window.addEventListener('load', ()=>{
   renderFooter('home-footer'); renderFooter('about-footer'); renderFooter('services-footer');
-  renderFooter('pricing-footer'); renderFooter('blog-footer'); renderFooter('contact-footer');
+  renderFooter('portfolio-footer'); renderFooter('pricing-footer'); renderFooter('blog-footer'); renderFooter('contact-footer');
   renderHeroMetrics(); renderWhy();
-  renderServices(); renderPricing(); renderFAQ();
+  renderServices(); renderPortfolio(); renderPricing(); renderFAQ();
   setTimeout(initReveal, 300);
 });
 </script>
