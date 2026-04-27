@@ -780,6 +780,7 @@ const PORTFOLIO_DATA = [
     subtitle: 'Academy website with a clean presentation and easy contact flow.',
     accent: '#0f766e',
     base: '#ecfeff',
+    image: 'portfolio-sayyed.svg',
   },
   {
     name: 'Salah Timings WebApp',
@@ -788,6 +789,7 @@ const PORTFOLIO_DATA = [
     subtitle: 'A focused web app built for prayer-time access and daily utility.',
     accent: '#1d4ed8',
     base: '#eff6ff',
+    image: 'portfolio-salah.svg',
   },
   {
     name: 'The Knowledge Haven',
@@ -796,6 +798,7 @@ const PORTFOLIO_DATA = [
     subtitle: 'A content-rich experience made for reading, discovery, and learning.',
     accent: '#7c3aed',
     base: '#f5f3ff',
+    image: 'portfolio-knowledge.svg',
   },
 ];
 
@@ -895,6 +898,9 @@ function wrapSvgText(text, maxLength) {
 }
 
 function createProjectPreview(project) {
+  if (project.image) {
+    return `images/${project.image}`;
+  }
   const safeId = project.name.toLowerCase().replace(/[^a-z0-9]+/g, '-');
   const titleLines = wrapSvgText(project.name, 20).map((line, index) =>
     `<tspan x="120" dy="${index === 0 ? 0 : 64}">${escapeSvgText(line)}</tspan>`

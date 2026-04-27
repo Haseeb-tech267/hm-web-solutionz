@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" role="img" aria-label="Sayyed Online Quraan Academy preview">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1200" y2="900" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#0d5b45"/>
+      <stop offset="1" stop-color="#163f34"/>
+    </linearGradient>
+    <linearGradient id="glass" x1="0" y1="0" x2="1200" y2="900" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.14"/>
+      <stop offset="1" stop-color="#ffffff" stop-opacity="0.02"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="900" fill="url(#bg)"/>
+  <g opacity="0.38">
+    <rect x="0" y="130" width="1200" height="540" fill="#6b4d23"/>
+    <g fill="#a46d2f">
+      <rect x="0" y="130" width="1200" height="18"/>
+      <rect x="0" y="220" width="1200" height="14"/>
+      <rect x="0" y="310" width="1200" height="14"/>
+      <rect x="0" y="400" width="1200" height="14"/>
+      <rect x="0" y="490" width="1200" height="14"/>
+      <rect x="0" y="580" width="1200" height="14"/>
+    </g>
+    <g fill="#d4a96a">
+      <rect x="60" y="118" width="18" height="560" rx="4"/>
+      <rect x="110" y="118" width="14" height="560" rx="4"/>
+      <rect x="160" y="118" width="20" height="560" rx="4"/>
+      <rect x="220" y="118" width="16" height="560" rx="4"/>
+      <rect x="290" y="118" width="15" height="560" rx="4"/>
+      <rect x="350" y="118" width="18" height="560" rx="4"/>
+      <rect x="430" y="118" width="16" height="560" rx="4"/>
+      <rect x="490" y="118" width="19" height="560" rx="4"/>
+      <rect x="560" y="118" width="15" height="560" rx="4"/>
+      <rect x="620" y="118" width="18" height="560" rx="4"/>
+      <rect x="690" y="118" width="14" height="560" rx="4"/>
+      <rect x="740" y="118" width="19" height="560" rx="4"/>
+      <rect x="810" y="118" width="17" height="560" rx="4"/>
+      <rect x="880" y="118" width="14" height="560" rx="4"/>
+      <rect x="940" y="118" width="18" height="560" rx="4"/>
+      <rect x="1010" y="118" width="15" height="560" rx="4"/>
+      <rect x="1080" y="118" width="20" height="560" rx="4"/>
+      <rect x="1140" y="118" width="16" height="560" rx="4"/>
+    </g>
+  </g>
+  <rect width="1200" height="170" fill="#0a5a43"/>
+  <circle cx="74" cy="72" r="48" fill="#f5f3e8" opacity="0.95"/>
+  <circle cx="74" cy="72" r="38" fill="none" stroke="#0a5a43" stroke-width="4"/>
+  <path d="M62 86V54h11l8 13 8-13h11v32h-9V68l-10 15h-2l-10-15v18z" fill="#0a5a43"/>
+  <text x="145" y="68" fill="#ffffff" font-family="Arial, Helvetica, sans-serif" font-size="30" font-weight="800">SAYYED ONLINE</text>
+  <text x="145" y="103" fill="#ffd966" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="800">QUR'AAN ACADEMY</text>
+  <g fill="#f7f7f7" font-family="Arial, Helvetica, sans-serif" font-size="23" font-weight="700">
+    <text x="760" y="76">Home</text><text x="855" y="76">Courses</text><text x="978" y="76">Reflection</text><text x="1103" y="76">Contact</text>
+  </g>
+  <g>
+    <circle cx="402" cy="505" r="90" fill="#f4f7f5" stroke="#ffd54f" stroke-width="8"/>
+    <circle cx="752" cy="505" r="90" fill="#eef2f1" stroke="#ffd54f" stroke-width="8"/>
+    <rect x="340" y="570" width="124" height="18" rx="9" fill="rgba(255,255,255,0.85)"/>
+    <rect x="690" y="570" width="124" height="18" rx="9" fill="rgba(255,255,255,0.85)"/>
+    <text x="402" y="648" text-anchor="middle" fill="#ffffff" font-family="Arial, Helvetica, sans-serif" font-size="28" font-weight="800">Sayyed Muhammad Areeb</text>
+    <text x="402" y="685" text-anchor="middle" fill="#ffd54f" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="700">Founder</text>
+    <text x="752" y="648" text-anchor="middle" fill="#ffffff" font-family="Arial, Helvetica, sans-serif" font-size="28" font-weight="800">Dr. Abroo Aman Andrabi</text>
+    <text x="752" y="685" text-anchor="middle" fill="#ffd54f" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="700">Director • Assistant Prof. at Jamia Hamdard University</text>
+  </g>
+  <rect x="0" y="170" width="1200" height="730" fill="url(#glass)"/>
+</svg>
