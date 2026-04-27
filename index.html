@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>WEB SOLUTIONZ — Professional Website Development</title>
 <meta name="description" content="WEB SOLUTIONZ builds modern, high-performance websites for businesses across India."/>
+<link rel="icon" type="image/svg+xml" href="images/favicon-emerald.svg"/>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Fraunces:wght@700;900&display=swap');
 
@@ -988,9 +989,9 @@ function renderPricing() {
   const el = document.getElementById('pricing-cards');
   if (!el || el.innerHTML) return;
   const plans = [
-    {n:'Basic',p:'₹7,999',badge:'',desc:'For small businesses and launch websites',featured:false,f:['5-page custom website','Mobile responsive design','Contact form setup','Basic SEO setup','Free domain connection']},
-    {n:'Standard',p:'₹13,999',badge:'Popular',desc:'Ideal for growing brands that need more features',featured:false,f:['Up to 10 pages','Advanced UI/UX design','CMS / Blog integration','WhatsApp chat widget','Google Analytics setup','Speed optimization']},
-    {n:'Business',p:'₹19,000',badge:'Most Popular',desc:'Built for businesses that want a strong digital presence',featured:true,f:['Up to 15 pages','Advanced SEO setup','Payment / booking integration','Lead forms and automation','Priority support','Training & handover']},
+    {n:'Basic',p:'₹7,999',badge:'',desc:'For small businesses and launch websites',featured:false,f:['5-page custom website','Mobile responsive design','Contact form setup','Basic SEO setup']},
+    {n:'Standard',p:'₹16,999',badge:'Popular',desc:'Ideal for growing brands that need more features',featured:false,f:['Up to 10 pages','Advanced UI/UX design','CMS / Blog integration','WhatsApp chat widget','Google Analytics setup','Basic performance setup']},
+    {n:'Business',p:'₹24,999',badge:'Most Popular',desc:'Built for businesses that want a strong digital presence',featured:true,f:['Up to 15 pages','Advanced SEO setup','Payment / booking integration','Lead forms and automation','Priority support','Training & handover']},
     {n:'Custom Pricing',p:'Quote',badge:'Tailored',desc:'For CRM, AI bot integration, dashboards, portals, and advanced websites',featured:false,f:['Custom website architecture','CRM development','AI bot integration','API and third-party integrations','Admin dashboards','Scalable solution planning']},
   ];
   el.innerHTML = plans.map(p=>`
@@ -1045,7 +1046,7 @@ function renderBlog() {
 function renderWhy() {
   const list = document.getElementById('why-list');
   if (!list || list.innerHTML) return;
-  ['Fast delivery — most projects in 7–14 days','Mobile-first, SEO-optimized from day one','Free domain & hosting setup included','3 months free support after launch','Transparent pricing, no hidden costs','Dedicated project manager for your account'].forEach(item=>{
+  ['Fast delivery — most projects in 7–14 days','Mobile-first, SEO-optimized from day one','Domain & hosting setup assistance included (ownership stays with client)','30-day bug fix guarantee after launch','Transparent pricing, no hidden costs','Dedicated project manager for your account'].forEach(item=>{
     list.innerHTML+=`<div style="display:flex;align-items:flex-start;gap:9px;margin-bottom:10px;"><div style="width:18px;height:18px;border-radius:50%;background:#eff6ff;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:10px;color:#2563eb;margin-top:1px;">✓</div><span style="font-size:14px;color:#374151;font-weight:500;">${item}</span></div>`;
   });
   const cards = document.getElementById('why-cards');

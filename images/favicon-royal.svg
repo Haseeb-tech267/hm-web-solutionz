@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="HM Web Solutionz favicon royal">
+  <defs>
+    <linearGradient id="bg" x1="10" y1="10" x2="54" y2="54" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#140b2d"/>
+      <stop offset="0.55" stop-color="#4f2fb8"/>
+      <stop offset="1" stop-color="#7c3aed"/>
+    </linearGradient>
+    <linearGradient id="text" x1="18" y1="18" x2="46" y2="46" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="1" stop-color="#f3e8ff"/>
+    </linearGradient>
+  </defs>
+  <rect x="2" y="2" width="60" height="60" rx="16" fill="url(#bg)"/>
+  <rect x="7" y="7" width="50" height="50" rx="13" fill="none" stroke="#ffffff" stroke-opacity="0.14" stroke-width="1.2"/>
+  <text x="32" y="38" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="800" letter-spacing="-1" fill="url(#text)">HM</text>
+  <circle cx="45.5" cy="18.5" r="3.1" fill="#fbbf24"/>
+</svg>
